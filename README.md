@@ -1,6 +1,5 @@
 # AI-Cost-CLI 🚀💸
 
-![AI-Cost-CLI Banner](https://via.placeholder.com/800x200?text=AI-Cost-CLI)
 > **Terminal-based AI API Cost Calculator, Converter, and Recommendation Engine.**
 
 Developing AI products and not sure which model API is the most cost-effective for your specific feature? **AI-Cost-CLI** helps you instantly calculate costs for multiple models, convert values to your local currency, and recommends the best model purely based on your task—all directly from your terminal.
@@ -52,10 +51,21 @@ aicost recommend "fast cheap ocr extraction"
 aicost recommend "premium complex reasoning coding task" --currency TRY
 ```
 
-### MCP Server (For AI Agents)
+### MCP Server (For AI Agents & IDEs)
 ```bash
 aicost mcp
 ```
+
+Since it runs a fully standard [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) `stdio` server, it can be seamlessly attached as a "Tool" to allow AI Agents to dynamically look up and suggest costs inside your coding environment. 
+
+**Supported Clients & IDEs:**
+- **Claude Desktop** (Add via `claude_desktop_config.json`)
+- **Cursor IDE** (Add as an MCP tool in settings)
+- **Windsurf IDE** (via Cline/RooCode extensions or native)
+- **Zed IDE**
+- **Trae IDE**
+- Any other Client supporting the standard Anthropic MCP protocol.
+
 
 ## 🤝 Contributing to `pricing.json`
 We want to support all popular AI APIs. Updating models is meant to be completely decoupled from the code.
