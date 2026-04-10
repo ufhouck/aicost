@@ -1,13 +1,58 @@
 {
   "models": [
     {
+      "id": "claude-opus-4.6",
+      "provider": "Anthropic",
+      "type": "text",
+      "cost_per_1m_input_tokens": 5.0,
+      "cost_per_1m_output_tokens": 25.0,
+      "tags": ["reasoning", "coding", "premium", "vision", "multimodal", "smart"],
+      "description": "High intelligence flagship model for complex tasks."
+    },
+    {
+      "id": "claude-sonnet-4.6",
+      "provider": "Anthropic",
+      "type": "text",
+      "cost_per_1m_input_tokens": 3.0,
+      "cost_per_1m_output_tokens": 15.0,
+      "tags": ["coding", "reasoning", "fast", "general", "vision"],
+      "description": "Ideal balance of intelligence and speed, excellent at coding."
+    },
+    {
+      "id": "claude-haiku-4.5",
+      "provider": "Anthropic",
+      "type": "text",
+      "cost_per_1m_input_tokens": 1.0,
+      "cost_per_1m_output_tokens": 5.0,
+      "tags": ["fast", "cheap", "vision", "extraction", "small"],
+      "description": "Lightweight model for near-instant responses."
+    },
+    {
+      "id": "gemini-3.1-pro",
+      "provider": "Google",
+      "type": "text",
+      "cost_per_1m_input_tokens": 2.0,
+      "cost_per_1m_output_tokens": 12.0,
+      "tags": ["long-context", "reasoning", "multimodal", "video", "audio"],
+      "description": "Powerful model with massive context window."
+    },
+    {
+      "id": "gemini-2.5-flash",
+      "provider": "Google",
+      "type": "text",
+      "cost_per_1m_input_tokens": 0.30,
+      "cost_per_1m_output_tokens": 2.50,
+      "tags": ["fast", "cheap", "long-context", "multimodal", "video", "extraction"],
+      "description": "Fast and most cost-efficient Google model."
+    },
+    {
       "id": "gpt-4o",
       "provider": "OpenAI",
       "type": "text",
       "cost_per_1m_input_tokens": 5.0,
       "cost_per_1m_output_tokens": 15.0,
       "tags": ["reasoning", "coding", "vision", "multimodal", "general", "premium", "smart"],
-      "description": "High intelligence flagship model for complex tasks."
+      "description": "Reliable standard model for complex tasks."
     },
     {
       "id": "gpt-4o-mini",
@@ -19,42 +64,6 @@
       "description": "Fast and affordable model for everyday tasks."
     },
     {
-      "id": "claude-3-5-sonnet",
-      "provider": "Anthropic",
-      "type": "text",
-      "cost_per_1m_input_tokens": 3.0,
-      "cost_per_1m_output_tokens": 15.0,
-      "tags": ["coding", "reasoning", "fast", "general", "vision"],
-      "description": "Ideal balance of intelligence and speed, excellent at coding."
-    },
-    {
-      "id": "claude-3-haiku",
-      "provider": "Anthropic",
-      "type": "text",
-      "cost_per_1m_input_tokens": 0.25,
-      "cost_per_1m_output_tokens": 1.25,
-      "tags": ["fast", "cheap", "vision", "extraction"],
-      "description": "Lightweight and fastest model for near-instant responses."
-    },
-    {
-      "id": "gemini-1.5-pro",
-      "provider": "Google",
-      "type": "text",
-      "cost_per_1m_input_tokens": 3.5,
-      "cost_per_1m_output_tokens": 10.5,
-      "tags": ["long-context", "reasoning", "multimodal", "video", "audio"],
-      "description": "Powerful model with 1M-2M context window."
-    },
-    {
-      "id": "gemini-1.5-flash",
-      "provider": "Google",
-      "type": "text",
-      "cost_per_1m_input_tokens": 0.075,
-      "cost_per_1m_output_tokens": 0.30,
-      "tags": ["fast", "cheap", "long-context", "multimodal", "video"],
-      "description": "Fastest and most cost-efficient Google model."
-    },
-    {
       "id": "deepseek-coder-v2",
       "provider": "DeepSeek",
       "type": "text",
@@ -64,19 +73,19 @@
       "description": "Extremely cost-effective model optimized for coding."
     },
     {
-      "id": "flux-1-pro",
+      "id": "flux-2-pro",
       "provider": "Fal.ai",
       "type": "image",
-      "cost_per_unit": 0.05,
+      "cost_per_unit": 0.035,
       "unit_type": "image",
       "tags": ["image", "generation", "premium", "design"],
       "description": "Top tier image generation model."
     },
     {
-      "id": "flux-1-schnell",
+      "id": "flux-2-klein",
       "provider": "Fal.ai",
       "type": "image",
-      "cost_per_unit": 0.003,
+      "cost_per_unit": 0.015,
       "unit_type": "image",
       "tags": ["image", "generation", "fast", "cheap", "draft"],
       "description": "Extremely fast image generation for quick drafts."
