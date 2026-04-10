@@ -2,6 +2,27 @@
 
 A terminal-based calculator and recommendation engine for AI API costs. Supports multiple providers, local currency conversion, and automated pricing updates.
 
+## Preview
+
+```text
+                    Comparison: gpt-4o vs claude-sonnet-4.6                     
+┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Attribute        ┃           gpt-4o            ┃      claude-sonnet-4.6      ┃
+┡━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ Provider         │           OpenAI            │          Anthropic          │
+├──────────────────┼─────────────────────────────┼─────────────────────────────┤
+│ Type             │            text             │            text             │
+├──────────────────┼─────────────────────────────┼─────────────────────────────┤
+│ Input Cost       │       2.5000 USD (1M)       │       3.0000 USD (1M)       │
+├──────────────────┼─────────────────────────────┼─────────────────────────────┤
+│ Output/Unit Cost │      10.0000 USD (1M)       │      15.0000 USD (1M)       │
+├──────────────────┼─────────────────────────────┼─────────────────────────────┤
+│ Tags             │ reasoning, coding, vision,  │  coding, reasoning, fast,   │
+│                  │    multimodal, general,     │       general, vision       │
+│                  │       premium, smart        │                             │
+└──────────────────┴─────────────────────────────┴─────────────────────────────┘
+```
+
 ## Features
 
 - **Direct Cost Calculation:** Calculate costs for text (tokens) and image (units) models.
@@ -39,7 +60,7 @@ aicost list --currency TRY
 aicost calc gpt-4o --input 1000000 --output 500000
 
 # Compare two models side-by-side
-aicost compare gpt-4o claude-3-5-sonnet --currency TRY
+aicost compare gpt-4o claude-sonnet-4.6 --currency TRY
 ```
 
 ### Recommendations & Feedback
