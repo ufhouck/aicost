@@ -5,7 +5,8 @@ import requests
 from pathlib import Path
 
 CACHE_DURATION = 24 * 60 * 60  # 24 hours
-CACHE_FILE = Path.home() / ".aicost_currency_cache.json"
+CACHE_DIR = Path.home() / ".aicost"
+CACHE_FILE = CACHE_DIR / "currency_cache.json"
 BASE_URL = "https://api.frankfurter.app/latest?from=USD"
 
 def _fetch_from_api() -> dict:
