@@ -1,103 +1,67 @@
-# AI-Cost-CLI 🚀💸
+# AI-Cost-CLI
 
-> **Terminal-based AI API Cost Calculator, Converter, and Recommendation Engine.**
+A terminal-based calculator and recommendation engine for AI API costs. Supports multiple providers, local currency conversion, and automated pricing updates.
 
-Developing AI products and not sure which model API is the most cost-effective for your specific feature? **AI-Cost-CLI** helps you instantly calculate costs for multiple models, convert values to your local currency, and recommends the best model purely based on your task—all directly from your terminal.
+## Features
 
-## ✨ Features
-1. **Cost Calculator:** Calculate costs instantly based on Input/Output tokens, or image generation parameters.
-2. **Recommendation Engine:** Not sure what to use? Explain your task (`ocr`, `cheap vision`, `complex reasoning`) and let the tool recommend the best Return-on-Investment model for you.
-3. **Currency Conversion:** Native integration with free exchange rates. Input `USD` output `TRY`, `EUR`, etc.
-4. **Agent Integration (MCP):** Acts as a [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) tool server out of the box. Meaning other agents like Claude Desktop can connect and use it!
-5. **Community Driven / Zero Server Costs:** Powered by a clean, local `pricing.json` file. Updating prices is as simple as making a quick Pull Request.
+- **Direct Cost Calculation:** Calculate costs for text (tokens) and image (units) models.
+- **Comparison Engine:** Side-by-side comparison of different models and providers.
+- **Recommendation Engine:** Suggests models based on task keywords (e.g., `ocr`, `coding`, `cheap`).
+- **Currency Conversion:** Real-time conversion to local currencies (TRY, EUR, etc.) with a 24-hour offline cache.
+- **Automated Pricing:** Weekly automated updates from official documentation sources via GitHub Actions.
+- **MCP Integration:** Functions as a [Model Context Protocol](https://modelcontextprotocol.io/) server for integration with AI agents (Cursor, Claude Desktop, etc.).
 
-## 🚀 Quick Start (Demo)
-<img src="demo.svg" width="80%">
+## Installation
 
----
-
-### 🌍 Global Ecosystem & Registries
-
-| Directory | Status |
-| :--- | :--- |
-| **Smithery.ai** | [View on Smithery](https://smithery.ai/skills/ufhouck-oskt/aicost) |
-| **Skills.sh** | [View on Skills.sh](https://skills.sh/ufhouck/aicost/aicost) |
-| **MCP Server** | Fully MCP Compatible 🤖 |
-
-## 📦 Installation
-
-To test locally right now:
 ```bash
 git clone https://github.com/ufhouck/aicost.git
 cd aicost
 pip install -e .
 ```
 
-Now you can use the `aicost` command anywhere on your system!
+## Usage
 
-## 💻 CLI Usage
-
-### View the complete pricing database
+### Pricing & Sync
 ```bash
+# List all models in USD
 aicost list
-aicost list --currency EUR
+
+# Sync latest verified prices from GitHub
+aicost sync
+
+# List in local currency
+aicost list --currency TRY
 ```
 
-### Calculate Cost
+### Cost Calculation
 ```bash
 # Calculate token-based cost
 aicost calc gpt-4o --input 1000000 --output 500000
 
-# Calculate target currency cost
-aicost calc claude-3-5-sonnet --input 500 --output 2000 --currency TRY
-
-# Image/Unit calculations 
-aicost calc flux-1-pro --units 10
+# Compare two models side-by-side
+aicost compare gpt-4o claude-3-5-sonnet --currency TRY
 ```
 
-### Task-Based Recommendations
+### Recommendations & Feedback
 ```bash
+# Get recommendations for a specific task
 aicost recommend "fast cheap ocr extraction"
-aicost recommend "premium complex reasoning coding task" --currency TRY
+
+# Report a price change (opens a pre-filled GitHub Issue)
+aicost report-price gpt-4o --input 2.5 --output 10.0
 ```
 
-### MCP Server (For AI Agents & IDEs)
+### MCP Server
 ```bash
 aicost mcp
 ```
 
-Since it runs a fully standard [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) `stdio` server, it can be seamlessly attached as a "Tool" to allow AI Agents to dynamically look up and suggest costs inside your coding environment. 
+## Registries
+- [Smithery.ai](https://smithery.ai/skills/ufhouck-oskt/aicost)
+- [Skills.sh](https://skills.sh/ufhouck/aicost/aicost)
 
-**Supported Clients & IDEs:**
-- **Claude Desktop** (Add via `claude_desktop_config.json`)
-- **Cursor IDE** (Add as an MCP tool in settings)
-- **Windsurf IDE** (via Cline/RooCode extensions or native)
-- **Zed IDE**
-- **Trae IDE**
-- Any other Client supporting the standard Anthropic MCP protocol.
+## Contributing
+The pricing database is located in `data/pricing.json`. Updates are automatically checked weekly, but manual Pull Requests are welcome for new models.
 
-
-## 🤝 Contributing to `pricing.json`
-We want to support all popular AI APIs. Updating models is meant to be completely decoupled from the code.
-1. Fork the repo.
-2. Edit `data/pricing.json`.
-3. Create a Pull Request.
-
-Example node:
-```json
-{
-  "id": "gpt-4o-mini",
-  "provider": "OpenAI",
-  "type": "text",
-  "cost_per_1m_input_tokens": 0.15,
-  "cost_per_1m_output_tokens": 0.60,
-  "tags": ["fast", "cheap", "ocr", "vision"],
-  "description": "Fast and affordable model for everyday tasks."
-}
-```
-
-## 📄 License & Credits
-Licensed under MIT. 
-Developed by **Ufuk Aydın**.
-- LinkedIn: [ufukaydin](https://linkedin.com/in/ufukaydin)
-- Website: [ufukaydin.com](http://www.ufukaydin.com)
+## License
+MIT. Developed by [Ufuk Aydın](https://ufukaydin.com).
