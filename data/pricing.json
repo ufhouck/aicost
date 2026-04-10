@@ -4,6 +4,7 @@
     {
       "id": "claude-opus-4.6",
       "provider": "Anthropic",
+      "source_type": "direct",
       "type": "text",
       "cost_per_1m_input_tokens": 30.0,
       "cost_per_1m_output_tokens": 150.0,
@@ -20,6 +21,7 @@
     {
       "id": "claude-sonnet-4.6",
       "provider": "Anthropic",
+      "source_type": "direct",
       "type": "text",
       "cost_per_1m_input_tokens": 3.0,
       "cost_per_1m_output_tokens": 15.0,
@@ -33,23 +35,24 @@
       "description": "Ideal balance of intelligence and speed, excellent at coding."
     },
     {
-      "id": "claude-haiku-4.5",
-      "provider": "Anthropic",
+      "id": "openrouter/claude-sonnet-4.6",
+      "provider": "OpenRouter",
+      "source_type": "aggregator",
+      "platform_fee": 0.055,
       "type": "text",
-      "cost_per_1m_input_tokens": 1.0,
-      "cost_per_1m_output_tokens": 5.0,
+      "cost_per_1m_input_tokens": 3.0,
+      "cost_per_1m_output_tokens": 15.0,
       "tags": [
-        "fast",
-        "cheap",
-        "vision",
-        "extraction",
-        "small"
+        "aggregator",
+        "multiple-nodes",
+        "unified-api"
       ],
-      "description": "Lightweight model for near-instant responses."
+      "description": "Claude 4.6 Sonnet via OpenRouter aggregator. Includes 5.5% credit fee."
     },
     {
       "id": "gemini-3.1-pro",
       "provider": "Google",
+      "source_type": "direct",
       "type": "text",
       "cost_per_1m_input_tokens": 2.0,
       "cost_per_1m_output_tokens": 12.0,
@@ -63,24 +66,9 @@
       "description": "Powerful model with massive context window."
     },
     {
-      "id": "gemini-2.5-flash",
-      "provider": "Google",
-      "type": "text",
-      "cost_per_1m_input_tokens": 0.3,
-      "cost_per_1m_output_tokens": 2.5,
-      "tags": [
-        "fast",
-        "cheap",
-        "long-context",
-        "multimodal",
-        "video",
-        "extraction"
-      ],
-      "description": "Fast and most cost-efficient Google model."
-    },
-    {
       "id": "gpt-4o",
       "provider": "OpenAI",
+      "source_type": "direct",
       "type": "text",
       "cost_per_1m_input_tokens": 2.5,
       "cost_per_1m_output_tokens": 10.0,
@@ -96,25 +84,63 @@
       "description": "Reliable standard model for complex tasks."
     },
     {
-      "id": "gpt-4o-mini",
-      "provider": "OpenAI",
+      "id": "openrouter/gpt-4o",
+      "provider": "OpenRouter",
+      "source_type": "aggregator",
+      "platform_fee": 0.055,
       "type": "text",
-      "cost_per_1m_input_tokens": 0.15,
-      "cost_per_1m_output_tokens": 0.6,
+      "cost_per_1m_input_tokens": 2.5,
+      "cost_per_1m_output_tokens": 10.0,
       "tags": [
-        "fast",
-        "cheap",
-        "general",
-        "ocr",
-        "vision",
-        "extraction",
-        "small"
+        "aggregator",
+        "unified-api"
       ],
-      "description": "Fast and affordable model for everyday tasks."
+      "description": "GPT-4o via OpenRouter. Base price + 5.5% platform fee."
+    },
+    {
+      "id": "portkey/gateway",
+      "provider": "Portkey",
+      "source_type": "gateway",
+      "type": "gateway",
+      "fixed_monthly_cost": 499.0,
+      "tags": [
+        "observability",
+        "logs",
+        "governance",
+        "enterprise"
+      ],
+      "description": "Enterprise AI Gateway. Pricing based on recorded logs (~$499/mo Pro tier)."
+    },
+    {
+      "id": "litellm/enterprise",
+      "provider": "LiteLLM",
+      "source_type": "gateway",
+      "type": "gateway",
+      "fixed_monthly_cost": 250.0,
+      "tags": [
+        "self-hosted",
+        "proxy",
+        "sso",
+        "audit-logs"
+      ],
+      "description": "Managed LiteLLM Proxy for teams. Base price for Enterprise Basic."
+    },
+    {
+      "id": "martian/router",
+      "provider": "Martian",
+      "source_type": "gateway",
+      "type": "gateway",
+      "tags": [
+        "intelligent-routing",
+        "cost-saving",
+        "enterprise"
+      ],
+      "description": "Dynamic model router. Pricing is custom/enterprise focused."
     },
     {
       "id": "deepseek-coder-v2",
       "provider": "DeepSeek",
+      "source_type": "direct",
       "type": "text",
       "cost_per_1m_input_tokens": 0.14,
       "cost_per_1m_output_tokens": 0.28,
@@ -124,62 +150,6 @@
         "reasoning"
       ],
       "description": "Extremely cost-effective model optimized for coding."
-    },
-    {
-      "id": "qwen-max",
-      "provider": "Alibaba",
-      "type": "text",
-      "cost_per_1m_input_tokens": 2.8,
-      "cost_per_1m_output_tokens": 8.4,
-      "tags": [
-        "reasoning",
-        "coding",
-        "smart",
-        "multimodal"
-      ],
-      "description": "Alibaba's most powerful flagship model."
-    },
-    {
-      "id": "qwen-plus",
-      "provider": "Alibaba",
-      "type": "text",
-      "cost_per_1m_input_tokens": 0.5,
-      "cost_per_1m_output_tokens": 1.5,
-      "tags": [
-        "fast",
-        "general",
-        "cheap"
-      ],
-      "description": "High-performance model balancing speed and intelligence."
-    },
-    {
-      "id": "flux-2-pro",
-      "provider": "Fal.ai",
-      "type": "image",
-      "cost_per_unit": 0.035,
-      "unit_type": "image",
-      "tags": [
-        "image",
-        "generation",
-        "premium",
-        "design"
-      ],
-      "description": "Top tier image generation model."
-    },
-    {
-      "id": "flux-2-klein",
-      "provider": "Fal.ai",
-      "type": "image",
-      "cost_per_unit": 0.015,
-      "unit_type": "image",
-      "tags": [
-        "image",
-        "generation",
-        "fast",
-        "cheap",
-        "draft"
-      ],
-      "description": "Extremely fast image generation for quick drafts."
     }
   ]
 }

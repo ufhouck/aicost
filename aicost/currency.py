@@ -77,7 +77,7 @@ def get_currency_date() -> str:
             with open(CACHE_FILE, "r") as f:
                 ts = json.load(f).get("timestamp", 0)
                 if ts:
-                    return datetime.datetime.fromtimestamp(ts).strftime("%B %d, %Y")
+                    return datetime.datetime.fromtimestamp(ts).strftime("%Y-%m-%d %H:%M:%S")
         except Exception:
             pass
     return "Live / No Cache"

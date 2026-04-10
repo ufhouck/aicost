@@ -40,6 +40,7 @@ def list(currency: str = typer.Option("USD", "--currency", "-c", help="Target cu
     table.add_column("ID", style="cyan", no_wrap=True)
     table.add_column("Provider", style="magenta")
     table.add_column("Type", justify="center")
+    table.add_column("Source", justify="center", style="yellow")
     table.add_column("Input Cost (1M)", justify="right", style="green")
     table.add_column("Output/Unit Cost", justify="right", style="green")
     table.add_column("Capabilities", style="dim")
@@ -56,9 +57,20 @@ def list(currency: str = typer.Option("USD", "--currency", "-c", help="Target cu
         if c_unit is not None: c_unit = convert_cost(c_unit, currency)
         
         str_in = f"{c_in:.4f}" if c_in is not None else "-"
-        str_out = f"{c_out:.4f} (1M)" if c_out is not None else f"{c_unit:.4f} (Unit)"
         
-        table.add_row(m["id"], m["provider"], m_type, str_in, str_out, tags)
+        if c_out is not None:
+            str_out = f"{c_out:.4f} (1M)"
+        elif c_unit is not None:
+            str_out = f"{c_unit:.4f} (Unit)"
+        else:
+            str_out = "-"
+        
+        # Display gateway monthly cost if available
+        if m.get("source_type") == "gateway" and m.get("fixed_monthly_cost"):
+            str_out = f"~{convert_cost(m['fixed_monthly_cost'], currency):.0f} {currency.upper()}/mo"
+            
+        source_label = m.get("source_type", "direct").capitalize()
+        table.add_row(m["id"], m["provider"], m_type, source_label, str_in, str_out, tags)
         
     console.print(table)
 
@@ -91,8 +103,17 @@ def calc(
     currency_fmt = currency.upper()
     meta = get_pricing_metadata()
 
+    # Breakdown for fees
+    breakdown = f"Model: [cyan]{m['id']}[/cyan]\nProvider: [magenta]{m['provider']}[/magenta]\nSource: [yellow]{m.get('source_type', 'direct').capitalize()}[/yellow]\nTask: {desc}\n"
+    
+    fee = m.get("platform_fee", 0.0)
+    if fee > 0:
+        base_cost = final_cost / (1 + fee)
+        fee_amount = final_cost - base_cost
+        breakdown += f"\nBase Cost: {base_cost:.4f} {currency_fmt}\nPlatform Fee ({fee*100:.1f}%): {fee_amount:.4f} {currency_fmt}"
+
     panel = Panel(
-        f"Model: [cyan]{m['id']}[/cyan]\nProvider: [magenta]{m['provider']}[/magenta]\nTask: {desc}\n\n[bold green]Total Cost: {final_cost:.4f} {currency_fmt}[/bold green]",
+        f"{breakdown}\n\n[bold green]Total Cost: {final_cost:.4f} {currency_fmt}[/bold green]",
         title="Cost Calculation",
         subtitle=f"[dim]Based on {meta.get('last_updated', 'Unknown')} rates[/dim]",
         expand=False
@@ -160,18 +181,27 @@ def compare(
     table.add_column(m1['id'], style="cyan", justify="center")
     table.add_column(m2['id'], style="magenta", justify="center")
 
-    def fmt_price(val, units=False):
-        if val is None: return "-"
-        converted = convert_cost(val, currency)
-        suffix = " (1M)" if not units else " (Unit)"
-        return f"{converted:.4f} {currency.upper()}{suffix}"
+    def fmt_price(m_data, input_val=True):
+        # Handle Gateway fixed monthly costs
+        if m_data.get("source_type") == "gateway" and m_data.get("fixed_monthly_cost"):
+            val = convert_cost(m_data["fixed_monthly_cost"], currency)
+            return f"~{val:.0f} {currency.upper()}/mo"
+            
+        fee = m_data.get("platform_fee", 0.0)
+        base_val = m_data.get('cost_per_1m_input_tokens') if input_val else (m_data.get('cost_per_1m_output_tokens') or m_data.get('cost_per_unit'))
+        if base_val is None: return "-"
+        
+        # Calculate effective cost (base + platform fee)
+        effective_val = convert_cost(base_val * (1 + fee), currency)
+        suffix = " (1M)" if m_data.get("type") == "text" else " (Unit)"
+        return f"{effective_val:.4f} {currency.upper()}{suffix}"
 
     table.add_row("Provider", m1['provider'], m2['provider'])
+    table.add_row("Source", m1.get('source_type', 'direct').capitalize(), m2.get('source_type', 'direct').capitalize())
+    table.add_row("Platform Fee", f"{m1.get('platform_fee', 0.0)*100:.1f}%", f"{m2.get('platform_fee', 0.0)*100:.1f}%")
     table.add_row("Type", m1.get('type'), m2.get('type'))
-    table.add_row("Input Cost", fmt_price(m1.get('cost_per_1m_input_tokens')), fmt_price(m2.get('cost_per_1m_input_tokens')))
-    table.add_row("Output/Unit Cost", 
-                  fmt_price(m1.get('cost_per_1m_output_tokens') or m1.get('cost_per_unit'), m1.get('type') != "text"),
-                  fmt_price(m2.get('cost_per_1m_output_tokens') or m2.get('cost_per_unit'), m2.get('type') != "text"))
+    table.add_row("Input Cost", fmt_price(m1, True), fmt_price(m2, True))
+    table.add_row("Output/Unit Cost", fmt_price(m1, False), fmt_price(m2, False))
     table.add_row("Tags", ", ".join(m1.get('tags', [])), ", ".join(m2.get('tags', [])))
 
     console.print(table)

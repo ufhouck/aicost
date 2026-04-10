@@ -35,31 +35,36 @@ def main():
     # OpenRouter contains direct models (openai/gpt-4o, anthropic/claude-3-opus, etc.)
     updates_made = 0
     for model in local_data["models"]:
-        # Find match in remote data
-        # Note: Mapping might need refinement based on exact naming conventions
+        # Skip gateway types with fixed costs (Martian, Portkey, etc.) as they aren't per-token
+        if model.get("source_type") == "gateway":
+            continue
+
         model_id = model["id"].lower()
         provider = model["provider"].lower()
         
-        # Heuristic for finding the same model on OpenRouter
-        match = next((rm for rm in remote_models if model_id in rm["id"].lower() and provider in rm["id"].lower()), None)
+        # Strip aggregator prefix if present for matching
+        clean_id = model_id.split("/")[-1] if "/" in model_id else model_id
+        
+        # Find match in remote data
+        match = next((rm for rm in remote_models if clean_id in rm["id"].lower()), None)
         
         if match:
-            # Extract prices (OpenRouter uses cost per token, we use per 1M)
+            # Extract base prices
             new_input = float(match["pricing"]["prompt"]) * 1_000_000
             new_output = float(match["pricing"]["completion"]) * 1_000_000
             
             if abs(model.get("cost_per_1m_input_tokens", 0) - new_input) > 0.000001:
-                print(f"Update found for {model['id']}: {model.get('cost_per_1m_input_tokens')} -> {new_input}")
+                print(f"Update found for {model['id']}: {model.get('cost_per_1m_input_tokens', 0):.4f} -> {new_input:.4f} (incl. fee)")
                 model["cost_per_1m_input_tokens"] = round(new_input, 4)
                 updates_made += 1
             
             if abs(model.get("cost_per_1m_output_tokens", 0) - new_output) > 0.000001:
-                print(f"Update found for {model['id']}: {model.get('cost_per_1m_output_tokens')} -> {new_output}")
+                print(f"Update found for {model['id']}: {model.get('cost_per_1m_output_tokens', 0):.4f} -> {new_output:.4f} (incl. fee)")
                 model["cost_per_1m_output_tokens"] = round(new_output, 4)
                 updates_made += 1
 
     if updates_made > 0:
-        local_data["last_updated"] = datetime.now().strftime("%B %d, %Y")
+        local_data["last_updated"] = datetime.now().strftime("%Y-%m-%d")
         with open(PRICING_FILE, "w", encoding="utf-8") as f:
             json.dump(local_data, f, indent=2)
         print(f"Total updates applied: {updates_made}")
