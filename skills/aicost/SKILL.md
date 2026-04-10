@@ -1,6 +1,9 @@
 ---
 name: aicost
 description: Lookup AI model costs, currency conversions, and recommend best cost-effective models for tasks.
+license: MIT
+metadata:
+  author: ufhouck
 ---
 
 # AICost Skill
