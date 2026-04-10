@@ -12,7 +12,7 @@ Developing AI products and not sure which model API is the most cost-effective f
 5. **Community Driven / Zero Server Costs:** Powered by a clean, local `pricing.json` file. Updating prices is as simple as making a quick Pull Request.
 
 ## 🚀 Quick Start (Demo)
-![AI-Cost-CLI Demo](demo.svg)
+<img src="demo.svg" width="80%">
 
 ## 📦 Installation
 
