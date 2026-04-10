@@ -5,9 +5,16 @@
       "id": "claude-opus-4.6",
       "provider": "Anthropic",
       "type": "text",
-      "cost_per_1m_input_tokens": 5.0,
-      "cost_per_1m_output_tokens": 25.0,
-      "tags": ["reasoning", "coding", "premium", "vision", "multimodal", "smart"],
+      "cost_per_1m_input_tokens": 30.0,
+      "cost_per_1m_output_tokens": 150.0,
+      "tags": [
+        "reasoning",
+        "coding",
+        "premium",
+        "vision",
+        "multimodal",
+        "smart"
+      ],
       "description": "High intelligence flagship model for complex tasks."
     },
     {
@@ -16,7 +23,13 @@
       "type": "text",
       "cost_per_1m_input_tokens": 3.0,
       "cost_per_1m_output_tokens": 15.0,
-      "tags": ["coding", "reasoning", "fast", "general", "vision"],
+      "tags": [
+        "coding",
+        "reasoning",
+        "fast",
+        "general",
+        "vision"
+      ],
       "description": "Ideal balance of intelligence and speed, excellent at coding."
     },
     {
@@ -25,7 +38,13 @@
       "type": "text",
       "cost_per_1m_input_tokens": 1.0,
       "cost_per_1m_output_tokens": 5.0,
-      "tags": ["fast", "cheap", "vision", "extraction", "small"],
+      "tags": [
+        "fast",
+        "cheap",
+        "vision",
+        "extraction",
+        "small"
+      ],
       "description": "Lightweight model for near-instant responses."
     },
     {
@@ -34,25 +53,46 @@
       "type": "text",
       "cost_per_1m_input_tokens": 2.0,
       "cost_per_1m_output_tokens": 12.0,
-      "tags": ["long-context", "reasoning", "multimodal", "video", "audio"],
+      "tags": [
+        "long-context",
+        "reasoning",
+        "multimodal",
+        "video",
+        "audio"
+      ],
       "description": "Powerful model with massive context window."
     },
     {
       "id": "gemini-2.5-flash",
       "provider": "Google",
       "type": "text",
-      "cost_per_1m_input_tokens": 0.30,
-      "cost_per_1m_output_tokens": 2.50,
-      "tags": ["fast", "cheap", "long-context", "multimodal", "video", "extraction"],
+      "cost_per_1m_input_tokens": 0.3,
+      "cost_per_1m_output_tokens": 2.5,
+      "tags": [
+        "fast",
+        "cheap",
+        "long-context",
+        "multimodal",
+        "video",
+        "extraction"
+      ],
       "description": "Fast and most cost-efficient Google model."
     },
     {
       "id": "gpt-4o",
       "provider": "OpenAI",
       "type": "text",
-      "cost_per_1m_input_tokens": 5.0,
-      "cost_per_1m_output_tokens": 15.0,
-      "tags": ["reasoning", "coding", "vision", "multimodal", "general", "premium", "smart"],
+      "cost_per_1m_input_tokens": 2.5,
+      "cost_per_1m_output_tokens": 10.0,
+      "tags": [
+        "reasoning",
+        "coding",
+        "vision",
+        "multimodal",
+        "general",
+        "premium",
+        "smart"
+      ],
       "description": "Reliable standard model for complex tasks."
     },
     {
@@ -60,8 +100,16 @@
       "provider": "OpenAI",
       "type": "text",
       "cost_per_1m_input_tokens": 0.15,
-      "cost_per_1m_output_tokens": 0.60,
-      "tags": ["fast", "cheap", "general", "ocr", "vision", "extraction", "small"],
+      "cost_per_1m_output_tokens": 0.6,
+      "tags": [
+        "fast",
+        "cheap",
+        "general",
+        "ocr",
+        "vision",
+        "extraction",
+        "small"
+      ],
       "description": "Fast and affordable model for everyday tasks."
     },
     {
@@ -70,8 +118,39 @@
       "type": "text",
       "cost_per_1m_input_tokens": 0.14,
       "cost_per_1m_output_tokens": 0.28,
-      "tags": ["coding", "cheap", "reasoning"],
+      "tags": [
+        "coding",
+        "cheap",
+        "reasoning"
+      ],
       "description": "Extremely cost-effective model optimized for coding."
+    },
+    {
+      "id": "qwen-max",
+      "provider": "Alibaba",
+      "type": "text",
+      "cost_per_1m_input_tokens": 2.8,
+      "cost_per_1m_output_tokens": 8.4,
+      "tags": [
+        "reasoning",
+        "coding",
+        "smart",
+        "multimodal"
+      ],
+      "description": "Alibaba's most powerful flagship model."
+    },
+    {
+      "id": "qwen-plus",
+      "provider": "Alibaba",
+      "type": "text",
+      "cost_per_1m_input_tokens": 0.5,
+      "cost_per_1m_output_tokens": 1.5,
+      "tags": [
+        "fast",
+        "general",
+        "cheap"
+      ],
+      "description": "High-performance model balancing speed and intelligence."
     },
     {
       "id": "flux-2-pro",
@@ -79,7 +158,12 @@
       "type": "image",
       "cost_per_unit": 0.035,
       "unit_type": "image",
-      "tags": ["image", "generation", "premium", "design"],
+      "tags": [
+        "image",
+        "generation",
+        "premium",
+        "design"
+      ],
       "description": "Top tier image generation model."
     },
     {
@@ -88,7 +172,13 @@
       "type": "image",
       "cost_per_unit": 0.015,
       "unit_type": "image",
-      "tags": ["image", "generation", "fast", "cheap", "draft"],
+      "tags": [
+        "image",
+        "generation",
+        "fast",
+        "cheap",
+        "draft"
+      ],
       "description": "Extremely fast image generation for quick drafts."
     }
   ]

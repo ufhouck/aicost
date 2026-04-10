@@ -3,9 +3,18 @@ from rich.console import Console
 from rich.table import Table
 from rich.panel import Panel
 
-from aicost.calculator import get_pricing_data, get_model_by_id, calculate_text_cost, calculate_image_cost, get_pricing_metadata
+from aicost.calculator import (
+    get_pricing_data, 
+    get_model_by_id, 
+    calculate_text_cost, 
+    calculate_image_cost, 
+    get_pricing_metadata,
+    fetch_remote_pricing
+)
 from aicost.currency import convert_cost, get_currency_date
 from aicost.recommender import recommend_models
+import webbrowser
+import urllib.parse
 
 app = typer.Typer(help="AI-Cost-CLI: Calculate, Compare, and Recommend AI API Costs.")
 console = Console()
@@ -115,6 +124,76 @@ def recommend(
             title=f"#{i} {m['id']} ({m['provider']})"
         )
         console.print(p)
+
+@app.command()
+def sync():
+    """Manually triggers a pricing update from the remote GitHub repository."""
+    console.print("[yellow]Syncing latest pricing data from GitHub...[/yellow]")
+    data = fetch_remote_pricing()
+    if data:
+        last_updated = data.get("last_updated", "Unknown")
+        console.print(f"[bold green]Success![/bold green] Pricing updated to: [cyan]{last_updated}[/cyan]")
+    else:
+        console.print("[bold red]Error:[/bold red] Could not fetch remote pricing. Check your internet connection.")
+
+@app.command()
+def compare(
+    model1: str = typer.Argument(..., help="First model ID"),
+    model2: str = typer.Argument(..., help="Second model ID"),
+    currency: str = typer.Option("USD", "--currency", "-c", help="Target currency")
+):
+    """Provides a side-by-side comparison between two models."""
+    m1 = get_model_by_id(model1)
+    m2 = get_model_by_id(model2)
+    
+    if not m1 or not m2:
+        missing = model1 if not m1 else model2
+        console.print(f"[bold red]Error:[/bold red] Model '{missing}' not found.")
+        return
+
+    table = Table(title=f"Comparison: {model1} vs {model2}", show_lines=True)
+    table.add_column("Attribute", style="bold white")
+    table.add_column(m1['id'], style="cyan", justify="center")
+    table.add_column(m2['id'], style="magenta", justify="center")
+
+    def fmt_price(val, units=False):
+        if val is None: return "-"
+        converted = convert_cost(val, currency)
+        suffix = " (1M)" if not units else " (Unit)"
+        return f"{converted:.4f} {currency.upper()}{suffix}"
+
+    table.add_row("Provider", m1['provider'], m2['provider'])
+    table.add_row("Type", m1.get('type'), m2.get('type'))
+    table.add_row("Input Cost", fmt_price(m1.get('cost_per_1m_input_tokens')), fmt_price(m2.get('cost_per_1m_input_tokens')))
+    table.add_row("Output/Unit Cost", 
+                  fmt_price(m1.get('cost_per_1m_output_tokens') or m1.get('cost_per_unit'), m1.get('type') != "text"),
+                  fmt_price(m2.get('cost_per_1m_output_tokens') or m2.get('cost_per_unit'), m2.get('type') != "text"))
+    table.add_row("Tags", ", ".join(m1.get('tags', [])), ", ".join(m2.get('tags', [])))
+
+    console.print(table)
+
+@app.command()
+def report_price(
+    model_id: str = typer.Argument(..., help="Model ID that has a price change"),
+    new_input: float = typer.Option(None, "--input", help="New input price per 1M tokens"),
+    new_output: float = typer.Option(None, "--output", help="New output price per 1M tokens"),
+    source: str = typer.Option(None, "--source", "-s", help="Source URL for the new pricing")
+):
+    """Generates a GitHub Issue link to report a pricing update."""
+    title = f"Price Update: {model_id}"
+    body = f"Model ID: {model_id}\nProposed Input: {new_input}\nProposed Output: {new_output}\nSource: {source}\n\nReported via AI-Cost-CLI."
+    
+    base_url = "https://github.com/ufhouck/aicost/issues/new"
+    params = {
+        "title": title,
+        "body": body,
+        "labels": "pricing-update"
+    }
+    url = f"{base_url}?{urllib.parse.urlencode(params)}"
+    
+    console.print(f"\n[bold cyan]Opening GitHub to report this change...[/bold cyan]")
+    console.print(f"[dim]{url}[/dim]\n")
+    webbrowser.open(url)
 
 @app.command()
 def mcp():

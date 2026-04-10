@@ -2,8 +2,14 @@ import mcp.server.stdio
 from mcp.server import Server
 from mcp.types import Tool, TextContent
 
-from aicost.calculator import get_pricing_data, get_model_by_id, calculate_text_cost, calculate_image_cost
-from aicost.currency import convert_cost
+from aicost.calculator import (
+    get_pricing_data, 
+    get_model_by_id, 
+    calculate_text_cost, 
+    calculate_image_cost,
+    get_pricing_metadata
+)
+from aicost.currency import convert_cost, get_currency_date
 from aicost.recommender import recommend_models
 
 app = Server("aicost-mcp-server")
@@ -37,6 +43,23 @@ async def list_tools() -> list[Tool]:
                 },
                 "required": ["task_description"]
             }
+        ),
+        Tool(
+            name="compare_ai_models",
+            description="Compare two AI models side-by-side to see which one is more cost-effective.",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "model_id_1": {"type": "string", "description": "ID of the first model"},
+                    "model_id_2": {"type": "string", "description": "ID of the second model"}
+                },
+                "required": ["model_id_1", "model_id_2"]
+            }
+        ),
+        Tool(
+            name="get_pricing_metadata",
+            description="Get metadata about the current pricing database, such as the last update date.",
+            inputSchema={"type": "object", "properties": {}}
         )
     ]
 
@@ -76,6 +99,25 @@ async def call_tool(name: str, arguments: dict) -> list[TextContent]:
             text_out += f"{i+1}. {m['id']} ({m['provider']}): {m['description']}\n"
             
         return [TextContent(type="text", text=text_out)]
+
+    elif name == "compare_ai_models":
+        m1 = get_model_by_id(arguments.get("model_id_1"))
+        m2 = get_model_by_id(arguments.get("model_id_2"))
+        
+        if not m1 or not m2:
+            return [TextContent(type="text", text="Error: One or both models not found.")]
+            
+        def fmt(m):
+            return f"Provider: {m['provider']}, Input: ${m.get('cost_per_1m_input_tokens',0)}/1M, Output: ${m.get('cost_per_1m_output_tokens') or m.get('cost_per_unit',0)}"
+
+        res = f"Comparison:\nModel 1 ({m1['id']}): {fmt(m1)}\nModel 2 ({m2['id']}): {fmt(m2)}"
+        return [TextContent(type="text", text=res)]
+
+    elif name == "get_pricing_metadata":
+        meta = get_pricing_metadata()
+        cur_date = get_currency_date()
+        res = f"Data Updated: {meta.get('last_updated', 'Unknown')}\nCurrency Matched: {cur_date}"
+        return [TextContent(type="text", text=res)]
         
     raise ValueError(f"Tool {name} is not supported")
 
