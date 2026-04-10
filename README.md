@@ -14,6 +14,16 @@ Developing AI products and not sure which model API is the most cost-effective f
 ## 🚀 Quick Start (Demo)
 <img src="demo.svg" width="80%">
 
+---
+
+### 🌍 Global Ecosystem & Registries
+
+| Directory | Status |
+| :--- | :--- |
+| **Smithery.ai** | [View on Smithery](https://smithery.ai/skills/ufhouck-oskt/aicost) |
+| **Skills.sh** | [View on Skills.sh](https://skills.sh/ufhouck/aicost/aicost) |
+| **MCP Server** | Fully MCP Compatible 🤖 |
+
 ## 📦 Installation
 
 To test locally right now:

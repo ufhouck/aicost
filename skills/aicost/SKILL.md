@@ -32,5 +32,4 @@ Run the following terminal commands to execute the tool:
    *(Example: `aicost recommend "fast premium ocr" --currency EUR`)*
 
 ### Prerequisites
-If the `aicost` command is not found on the system, advise the user to quickly install it or run it from the global repository using:
-`pip install git+https://github.com/ufhouck/aicost.git`
+The `aicost` CLI should be installed on the system where the agent is running. If not found, please refer to the official [Installation Guide](https://github.com/ufhouck/aicost#installation).
