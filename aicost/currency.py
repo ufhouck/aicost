@@ -21,26 +21,36 @@ def _fetch_from_api() -> dict:
         return {"USD": 1.0} # Fallback
 
 def get_rates() -> dict:
-    """Gets exchange rates from Frankfurter, using a 24-hour local cache."""
+    """Gets exchange rates, using a 24-hour cache with a stale-fallback mechanism."""
     now = time.time()
+    stale_rates = None
+    
     if CACHE_FILE.exists():
         try:
             with open(CACHE_FILE, "r") as f:
                 cached_data = json.load(f)
+            stale_rates = cached_data.get("rates", {"USD": 1.0})
+            # If cache is fresh, return it immediately
             if now - cached_data.get("timestamp", 0) < CACHE_DURATION:
-                return cached_data.get("rates", {"USD": 1.0})
+                return stale_rates
         except Exception:
-            pass # fallback to fetch
+            pass
 
-    # If we are here, we need to fetch new rates
+    # Try to fetch new rates
     rates = _fetch_from_api()
-    if rates and "USD" in rates: # check if fetch was at least partially successful
+    if rates and len(rates) > 1: # check if fetch was successful (more than just USD)
         try:
             with open(CACHE_FILE, "w") as f:
                 json.dump({"timestamp": now, "rates": rates}, f)
         except Exception:
-            pass # ignore if we cannot write cache
-    return rates
+            pass
+        return rates
+    
+    # If fetch failed but we have stale rates, use them as fallback
+    if stale_rates:
+        return stale_rates
+        
+    return {"USD": 1.0}
 
 def convert_cost(cost_usd: float, to_currency: str) -> float:
     """Converts a cost in USD to the target currency."""
@@ -53,6 +63,8 @@ def convert_cost(cost_usd: float, to_currency: str) -> float:
         return cost_usd * rates[to_currency]
     else:
         # Fallback if currency not found
+        from rich.console import Console
+        Console(stderr=True).print(f"[bold yellow]Warning:[/bold yellow] Currency '{to_currency}' not found or network error. Using USD.")
         return cost_usd
 
 def get_currency_date() -> str:
