@@ -133,7 +133,8 @@ def recommend(
         console.print("[bold yellow]No models match this task clearly. Try other keywords.[/bold yellow]")
         return
         
-    console.print(f"\n[bold cyan]Top {len(models)} Recommendations for:[/bold cyan] '{task}' [dim](Data: {meta.get('last_updated', 'Unknown')})[/dim]\n")
+    last_updated = meta.get("last_updated", "Unknown")
+    console.print(f"\n[bold cyan]Top {len(models)} Recommendations for:[/bold cyan] '{task}' [dim](Data: {last_updated})[/dim]\n")
     
     for i, m in enumerate(models, 1):
         c_in = m.get("cost_per_1m_input_tokens")
