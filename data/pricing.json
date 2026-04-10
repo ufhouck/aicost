@@ -1,5 +1,5 @@
 {
-  "last_updated": "April 10, 2026",
+  "last_updated": "2026-04-10",
   "models": [
     {
       "id": "claude-opus-4.6",
@@ -8,14 +8,7 @@
       "type": "text",
       "cost_per_1m_input_tokens": 30.0,
       "cost_per_1m_output_tokens": 150.0,
-      "tags": [
-        "reasoning",
-        "coding",
-        "premium",
-        "vision",
-        "multimodal",
-        "smart"
-      ],
+      "tags": ["reasoning", "coding", "premium", "vision", "multimodal", "smart"],
       "description": "High intelligence flagship model for complex tasks."
     },
     {
@@ -25,13 +18,7 @@
       "type": "text",
       "cost_per_1m_input_tokens": 3.0,
       "cost_per_1m_output_tokens": 15.0,
-      "tags": [
-        "coding",
-        "reasoning",
-        "fast",
-        "general",
-        "vision"
-      ],
+      "tags": ["coding", "reasoning", "fast", "general", "vision"],
       "description": "Ideal balance of intelligence and speed, excellent at coding."
     },
     {
@@ -42,11 +29,7 @@
       "type": "text",
       "cost_per_1m_input_tokens": 3.0,
       "cost_per_1m_output_tokens": 15.0,
-      "tags": [
-        "aggregator",
-        "multiple-nodes",
-        "unified-api"
-      ],
+      "tags": ["aggregator", "multiple-nodes", "unified-api"],
       "description": "Claude 4.6 Sonnet via OpenRouter aggregator. Includes 5.5% credit fee."
     },
     {
@@ -56,13 +39,7 @@
       "type": "text",
       "cost_per_1m_input_tokens": 2.0,
       "cost_per_1m_output_tokens": 12.0,
-      "tags": [
-        "long-context",
-        "reasoning",
-        "multimodal",
-        "video",
-        "audio"
-      ],
+      "tags": ["long-context", "reasoning", "multimodal", "video", "audio"],
       "description": "Powerful model with massive context window."
     },
     {
@@ -72,15 +49,7 @@
       "type": "text",
       "cost_per_1m_input_tokens": 2.5,
       "cost_per_1m_output_tokens": 10.0,
-      "tags": [
-        "reasoning",
-        "coding",
-        "vision",
-        "multimodal",
-        "general",
-        "premium",
-        "smart"
-      ],
+      "tags": ["reasoning", "coding", "vision", "multimodal", "general", "premium", "smart"],
       "description": "Reliable standard model for complex tasks."
     },
     {
@@ -91,10 +60,7 @@
       "type": "text",
       "cost_per_1m_input_tokens": 2.5,
       "cost_per_1m_output_tokens": 10.0,
-      "tags": [
-        "aggregator",
-        "unified-api"
-      ],
+      "tags": ["aggregator", "unified-api"],
       "description": "GPT-4o via OpenRouter. Base price + 5.5% platform fee."
     },
     {
@@ -103,12 +69,7 @@
       "source_type": "gateway",
       "type": "gateway",
       "fixed_monthly_cost": 499.0,
-      "tags": [
-        "observability",
-        "logs",
-        "governance",
-        "enterprise"
-      ],
+      "tags": ["observability", "logs", "governance", "enterprise"],
       "description": "Enterprise AI Gateway. Pricing based on recorded logs (~$499/mo Pro tier)."
     },
     {
@@ -117,12 +78,7 @@
       "source_type": "gateway",
       "type": "gateway",
       "fixed_monthly_cost": 250.0,
-      "tags": [
-        "self-hosted",
-        "proxy",
-        "sso",
-        "audit-logs"
-      ],
+      "tags": ["self-hosted", "proxy", "sso", "audit-logs"],
       "description": "Managed LiteLLM Proxy for teams. Base price for Enterprise Basic."
     },
     {
@@ -130,11 +86,7 @@
       "provider": "Martian",
       "source_type": "gateway",
       "type": "gateway",
-      "tags": [
-        "intelligent-routing",
-        "cost-saving",
-        "enterprise"
-      ],
+      "tags": ["intelligent-routing", "cost-saving", "enterprise"],
       "description": "Dynamic model router. Pricing is custom/enterprise focused."
     },
     {
@@ -144,11 +96,7 @@
       "type": "text",
       "cost_per_1m_input_tokens": 0.14,
       "cost_per_1m_output_tokens": 0.28,
-      "tags": [
-        "coding",
-        "cheap",
-        "reasoning"
-      ],
+      "tags": ["coding", "cheap", "reasoning"],
       "description": "Extremely cost-effective model optimized for coding."
     }
   ]
