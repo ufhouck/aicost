@@ -3,8 +3,8 @@ from rich.console import Console
 from rich.table import Table
 from rich.panel import Panel
 
-from aicost.calculator import get_pricing_data, get_model_by_id, calculate_text_cost, calculate_image_cost
-from aicost.currency import convert_cost
+from aicost.calculator import get_pricing_data, get_model_by_id, calculate_text_cost, calculate_image_cost, get_pricing_metadata
+from aicost.currency import convert_cost, get_currency_date
 from aicost.recommender import recommend_models
 
 app = typer.Typer(help="AI-Cost-CLI: Calculate, Compare, and Recommend AI API Costs.")
@@ -14,8 +14,16 @@ console = Console()
 def list(currency: str = typer.Option("USD", "--currency", "-c", help="Target currency (e.g., USD, TRY, EUR)")):
     """Lists all available AI models and their pricing."""
     models = get_pricing_data()
+    meta = get_pricing_metadata()
+    last_updated = meta.get("last_updated", "Unknown")
+    currency_date = get_currency_date()
     
-    table = Table(title=f"AI Models Pricing Database ({currency.upper()})", show_lines=True)
+    table = Table(
+        title=f"AI Models Pricing Database ({currency.upper()})", 
+        show_lines=True,
+        caption=f"[dim]Pricing details updated: {last_updated} | Currency matched: {currency_date}[/dim]",
+        caption_justify="right"
+    )
     table.add_column("ID", style="cyan", no_wrap=True)
     table.add_column("Provider", style="magenta")
     table.add_column("Type", justify="center")
@@ -68,10 +76,12 @@ def calc(
 
     final_cost = convert_cost(usd_cost, currency)
     currency_fmt = currency.upper()
+    meta = get_pricing_metadata()
 
     panel = Panel(
         f"Model: [cyan]{m['id']}[/cyan]\nProvider: [magenta]{m['provider']}[/magenta]\nTask: {desc}\n\n[bold green]Total Cost: {final_cost:.4f} {currency_fmt}[/bold green]",
         title="Cost Calculation",
+        subtitle=f"[dim]Based on {meta.get('last_updated', 'Unknown')} rates[/dim]",
         expand=False
     )
     console.print(panel)
@@ -84,11 +94,12 @@ def recommend(
 ):
     """Recommends the best models for a given task."""
     models = recommend_models(task, limit=limit)
+    meta = get_pricing_metadata()
     if not models:
         console.print("[bold yellow]No models match this task clearly. Try other keywords.[/bold yellow]")
         return
         
-    console.print(f"\n[bold cyan]Top {len(models)} Recommendations for:[/bold cyan] '{task}'\n")
+    console.print(f"\n[bold cyan]Top {len(models)} Recommendations for:[/bold cyan] '{task}' [dim](Data: {meta.get('last_updated', 'Unknown')})[/dim]\n")
     
     for i, m in enumerate(models, 1):
         c_in = m.get("cost_per_1m_input_tokens")

@@ -18,6 +18,18 @@ def get_pricing_data() -> list:
                 
     return []
 
+def get_pricing_metadata() -> dict:
+    """Loads the root metadata from pricing data."""
+    potential_paths = [
+        os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "pricing.json"),
+        os.path.join(os.getcwd(), "data", "pricing.json")
+    ]
+    for path in potential_paths:
+        if os.path.exists(path):
+            with open(path, "r", encoding="utf-8") as f:
+                return json.load(f)
+    return {}
+
 def calculate_text_cost(model: dict, input_tokens: int, output_tokens: int) -> float:
     """Calculates the cost for text-based models based on token counts."""
     input_cost = (input_tokens / 1_000_000) * model.get("cost_per_1m_input_tokens", 0)

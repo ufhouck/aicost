@@ -53,3 +53,16 @@ def convert_cost(cost_usd: float, to_currency: str) -> float:
     else:
         # Fallback if currency not found
         return cost_usd
+
+def get_currency_date() -> str:
+    """Returns a formatted string of when the currecy was last fetched."""
+    import datetime
+    if CACHE_FILE.exists():
+        try:
+            with open(CACHE_FILE, "r") as f:
+                ts = json.load(f).get("timestamp", 0)
+                if ts:
+                    return datetime.datetime.fromtimestamp(ts).strftime("%B %d, %Y")
+        except Exception:
+            pass
+    return "Live / No Cache"
