@@ -48,6 +48,8 @@ def get_rates() -> dict:
     
     # If fetch failed but we have stale rates, use them as fallback
     if stale_rates:
+        import sys
+        print("\n[bold yellow]Offline Warning:[/bold yellow] Could not refresh currencies. Using cached rates.", file=sys.stderr)
         return stale_rates
         
     return {"USD": 1.0}
