@@ -1,3 +1,7 @@
+import warnings
+# Suppress the urllib3 NotOpenSSLWarning on macOS/LibreSSL systems
+warnings.filterwarnings("ignore", message=".*urllib3 v2 only supports OpenSSL 1.1.1+.*")
+
 import typer
 from rich.console import Console
 from rich.table import Table
