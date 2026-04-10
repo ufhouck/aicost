@@ -2,35 +2,67 @@
 
 A terminal-based calculator and recommendation engine for AI API costs. Supports multiple providers, local currency conversion, and automated pricing updates.
 
-## Preview
+## Preview: Direct vs. Aggregator Comparison
+
+Compare the effective cost of using models directly vs. through gateways like **OpenRouter**, including platform fees.
 
 ```text
-                    Comparison: gpt-4o vs claude-sonnet-4.6                     
-┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ Attribute        ┃           gpt-4o            ┃      claude-sonnet-4.6      ┃
-┡━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
-│ Provider         │           OpenAI            │          Anthropic          │
-├──────────────────┼─────────────────────────────┼─────────────────────────────┤
-│ Type             │            text             │            text             │
-├──────────────────┼─────────────────────────────┼─────────────────────────────┤
-│ Input Cost       │       2.5000 USD (1M)       │       3.0000 USD (1M)       │
-├──────────────────┼─────────────────────────────┼─────────────────────────────┤
-│ Output/Unit Cost │      10.0000 USD (1M)       │      15.0000 USD (1M)       │
-├──────────────────┼─────────────────────────────┼─────────────────────────────┤
-│ Tags             │ reasoning, coding, vision,  │  coding, reasoning, fast,   │
-│                  │    multimodal, general,     │       general, vision       │
-│                  │       premium, smart        │                             │
-└──────────────────┴─────────────────────────────┴─────────────────────────────┘
+                    Comparison: gpt-4o vs openrouter/gpt-4o                     
+┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Attribute        ┃             gpt-4o              ┃    openrouter/gpt-4o    ┃
+┡━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ Provider         │             OpenAI              │       OpenRouter        │
+├──────────────────┼─────────────────────────────────┼─────────────────────────┤
+│ Source           │             Direct              │       Aggregator        │
+├──────────────────┼─────────────────────────────────┼─────────────────────────┤
+│ Platform Fee     │              0.0%               │          5.5%           │
+├──────────────────┼─────────────────────────────────┼─────────────────────────┤
+│ Type             │              text               │          text           │
+├──────────────────┼─────────────────────────────────┼─────────────────────────┤
+│ Input Cost       │        111.4775 TRY (1M)        │    117.6088 TRY (1M)    │
+├──────────────────┼─────────────────────────────────┼─────────────────────────┤
+│ Output/Unit Cost │        445.9100 TRY (1M)        │    470.4350 TRY (1M)    │
+└──────────────────┴─────────────────────────────────┴─────────────────────────┘
 ```
 
 ## Features
 
-- **Direct Cost Calculation:** Calculate costs for text (tokens) and image (units) models.
-- **Comparison Engine:** Side-by-side comparison of different models and providers.
-- **Recommendation Engine:** Suggests models based on task keywords (e.g., `ocr`, `coding`, `cheap`).
-- **Currency Conversion:** Real-time conversion to local currencies (TRY, EUR, etc.) with a 24-hour offline cache.
-- **Automated Pricing:** Weekly automated updates from official documentation sources via GitHub Actions.
-- **MCP Integration:** Functions as a [Model Context Protocol](https://modelcontextprotocol.io/) server for integration with AI agents (Cursor, Claude Desktop, etc.).
+- **Infrastructure Comparison:** Compare **Direct** providers vs. **Aggregators** (OpenRouter) and **Gateways** (Portkey, LiteLLM, Martian).
+- **Transparent Commissions:** Automatically calculates platform fees (e.g., OpenRouter's 5.5% credit fee).
+- **Direct Cost Calculation:** Full breakdown of base costs and platform middle-layer fees.
+- **Currency Conversion:** Real-time conversion to local currencies (TRY, EUR, etc.) with offline fallback.
+- **Automated Pricing:** Weekly automated updates from official provider documentation.
+- **MCP Server:** Native support for AI agents (Cursor, Claude Desktop).
+
+## Usage
+
+### Infrastructure & Sync
+```bash
+# List all models including Source Type (Direct/Aggregator/Gateway)
+aicost list --currency TRY
+
+# Compare Direct vs. Aggregator pricing
+aicost compare gpt-4o openrouter/gpt-4o --currency TRY
+```
+
+### Advanced Cost Calculation
+Includes platform fee breakdowns for aggregators:
+```bash
+aicost calc openrouter/gpt-4o --input 1000000 --output 500000 --currency TRY
+```
+
+**Output Example:**
+```text
+╭───────── Cost Calculation ──────────╮
+│ Model: openrouter/gpt-4o            │
+│ Source: Aggregator                  │
+│                                     │
+│ Base Cost: 316.9976 TRY             │
+│ Platform Fee (5.5%): 17.4349 TRY    │
+│                                     │
+│ Total Cost: 334.4325 TRY            │
+╰─────────────────────────────────────╯
+```
 
 ## Installation
 
@@ -40,39 +72,7 @@ cd aicost
 pip install -e .
 ```
 
-## Usage
-
-### Pricing & Sync
-```bash
-# List all models in USD
-aicost list
-
-# Sync latest verified prices from GitHub
-aicost sync
-
-# List in local currency
-aicost list --currency TRY
-```
-
-### Cost Calculation
-```bash
-# Calculate token-based cost
-aicost calc gpt-4o --input 1000000 --output 500000
-
-# Compare two models side-by-side
-aicost compare gpt-4o claude-sonnet-4.6 --currency TRY
-```
-
-### Recommendations & Feedback
-```bash
-# Get recommendations for a specific task
-aicost recommend "fast cheap ocr extraction"
-
-# Report a price change (opens a pre-filled GitHub Issue)
-aicost report-price gpt-4o --input 2.5 --output 10.0
-```
-
-### MCP Server
+## MCP Server
 ```bash
 aicost mcp
 ```
@@ -82,7 +82,7 @@ aicost mcp
 - [Skills.sh](https://skills.sh/ufhouck/aicost/aicost)
 
 ## Contributing
-The pricing database is located in `data/pricing.json`. Updates are automatically checked weekly, but manual Pull Requests are welcome for new models.
+The pricing database is located in `data/pricing.json`. Updates are automatically checked weekly.
 
 ## License
 MIT. Developed by [Ufuk Aydın](https://ufukaydin.com).
