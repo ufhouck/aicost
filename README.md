@@ -1,8 +1,9 @@
 # AI-Cost-CLI
 
+[![PyPI](https://img.shields.io/pypi/v/aicost-cli.svg)](https://pypi.org/project/aicost-cli/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/downloads/)
-[![MCP Compatible](https://img.shields.io/badge/MCP-Compatible-green.svg)](https://modelcontextprotocol.io)
+[![MCP Registry](https://img.shields.io/badge/MCP-Registry-green.svg)](https://registry.modelcontextprotocol.io)
 
 A terminal-based calculator and recommendation engine for AI API costs. Supports multiple providers, local currency conversion, and automated pricing updates.
 
@@ -75,14 +76,19 @@ Compare the effective cost of using models directly vs. through gateways like **
 ## Installation
 
 ```bash
-git clone https://github.com/ufhouck/aicost.git
-cd aicost
-pip install -e .
+pip install aicost-cli
 ```
 
 With MCP server support:
 ```bash
-pip install -e ".[mcp]"
+pip install aicost-cli[mcp]
+```
+
+Or from source:
+```bash
+git clone https://github.com/ufhouck/aicost.git
+cd aicost
+pip install -e .
 ```
 
 ## Usage
@@ -137,6 +143,8 @@ aicost mcp
 ```
 
 ## Registries
+- [PyPI](https://pypi.org/project/aicost-cli/)
+- [MCP Registry](https://registry.modelcontextprotocol.io) — `io.github.ufhouck/aicost-cli`
 - [Smithery.ai](https://smithery.ai/skills/ufhouck-oskt/aicost)
 - [Skills.sh](https://skills.sh/ufhouck/aicost/aicost)
 
