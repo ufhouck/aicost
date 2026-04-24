@@ -1,12 +1,28 @@
 [project]
-name = "aicost"
-version = "0.1.0"
-description = "Terminal-based AI API Cost Calculator, Converter & Recommender"
+name = "aicost-cli"
+version = "1.1.0"
+description = "Terminal-based AI API Cost Calculator, Converter & Recommender. Compare providers, convert currencies, and get model recommendations."
+license = {text = "MIT"}
 authors = [
     { name = "Ufuk Aydin", email = "info@ufukaydin.com" }
 ]
 readme = "README.md"
 requires-python = ">=3.9"
+keywords = ["ai", "llm", "pricing", "cost", "calculator", "openai", "anthropic", "mcp", "cli"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Office/Business :: Financial",
+]
 dependencies = [
     "typer>=0.12.3",
     "rich>=13.7.1",
@@ -16,9 +32,21 @@ dependencies = [
 [project.optional-dependencies]
 mcp = ["mcp>=1.0.0"]
 
+[project.urls]
+Homepage = "https://github.com/ufhouck/aicost"
+Repository = "https://github.com/ufhouck/aicost"
+Issues = "https://github.com/ufhouck/aicost/issues"
+Changelog = "https://github.com/ufhouck/aicost/blob/main/CHANGELOG.md"
+
 [project.scripts]
 aicost = "aicost.cli:app"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["aicost"]
+
+[tool.hatch.build.targets.sdist]
+include = ["aicost", "data", "scripts", "README.md", "pyproject.toml", "server.json"]

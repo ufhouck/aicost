@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-10",
+  "last_updated": "2026-04-24",
   "models": [
     {
       "id": "claude-opus-4.6",
@@ -8,8 +8,18 @@
       "type": "text",
       "cost_per_1m_input_tokens": 30.0,
       "cost_per_1m_output_tokens": 150.0,
-      "tags": ["reasoning", "coding", "premium", "vision", "multimodal", "smart"],
+      "tags": ["reasoning", "coding", "premium", "vision", "multimodal", "smart", "legacy"],
       "description": "High intelligence flagship model for complex tasks."
+    },
+    {
+      "id": "claude-opus-4.7",
+      "provider": "Anthropic",
+      "source_type": "direct",
+      "type": "text",
+      "cost_per_1m_input_tokens": 5.0,
+      "cost_per_1m_output_tokens": 25.0,
+      "tags": ["reasoning", "coding", "premium", "vision", "multimodal", "smart", "agentic"],
+      "description": "Next-gen flagship with advanced coding, agentic workflows, and high-res vision. 6x cheaper than Opus 4.6."
     },
     {
       "id": "claude-sonnet-4.6",
@@ -43,14 +53,162 @@
       "description": "Powerful model with massive context window."
     },
     {
+      "id": "gemini-3.1-flash-lite",
+      "provider": "Google",
+      "source_type": "direct",
+      "type": "text",
+      "cost_per_1m_input_tokens": 0.25,
+      "cost_per_1m_output_tokens": 1.50,
+      "tags": ["fast", "cheap", "multimodal", "agentic"],
+      "description": "Fastest and most budget-friendly Google model for high-volume workloads."
+    },
+    {
+      "id": "gemini-2.5-flash",
+      "provider": "Google",
+      "source_type": "direct",
+      "type": "text",
+      "cost_per_1m_input_tokens": 0.30,
+      "cost_per_1m_output_tokens": 2.50,
+      "tags": ["fast", "cheap", "reasoning", "multimodal", "legacy"],
+      "description": "Previous-gen hybrid reasoning model with 1M context. Being superseded by 3.1 series."
+    },
+    {
+      "id": "imagen-4-fast",
+      "provider": "Google",
+      "source_type": "direct",
+      "type": "image",
+      "cost_per_unit": 0.02,
+      "tags": ["image", "generation", "fast", "cheap"],
+      "description": "Fast image generation at $0.02/image. Best for prototyping and high-volume."
+    },
+    {
+      "id": "imagen-4",
+      "provider": "Google",
+      "source_type": "direct",
+      "type": "image",
+      "cost_per_unit": 0.04,
+      "tags": ["image", "generation"],
+      "description": "Standard quality image generation at $0.04/image."
+    },
+    {
+      "id": "imagen-4-ultra",
+      "provider": "Google",
+      "source_type": "direct",
+      "type": "image",
+      "cost_per_unit": 0.06,
+      "tags": ["image", "generation", "premium"],
+      "description": "Highest quality image generation at $0.06/image."
+    },
+    {
+      "id": "veo-3",
+      "provider": "Google",
+      "source_type": "direct",
+      "type": "video",
+      "cost_per_unit": 0.40,
+      "tags": ["video", "generation", "premium", "audio"],
+      "description": "High-fidelity video generation with native audio at $0.40/second."
+    },
+    {
+      "id": "veo-3-lite",
+      "provider": "Google",
+      "source_type": "direct",
+      "type": "video",
+      "cost_per_unit": 0.05,
+      "tags": ["video", "generation", "fast", "cheap"],
+      "description": "Cost-effective 720p video generation at $0.05/second."
+    },
+    {
+      "id": "lyria-3-pro",
+      "provider": "Google",
+      "source_type": "direct",
+      "type": "audio",
+      "cost_per_unit": 0.08,
+      "tags": ["music", "audio", "generation", "premium"],
+      "description": "Full-length music composition (up to 3 min) at $0.08/song with vocals and arrangements."
+    },
+    {
+      "id": "lyria-3-clip",
+      "provider": "Google",
+      "source_type": "direct",
+      "type": "audio",
+      "cost_per_unit": 0.04,
+      "tags": ["music", "audio", "generation", "fast", "cheap"],
+      "description": "Short musical clips and loops (up to 30 sec) at $0.04/clip."
+    },
+    {
       "id": "gpt-4o",
       "provider": "OpenAI",
       "source_type": "direct",
       "type": "text",
       "cost_per_1m_input_tokens": 2.5,
       "cost_per_1m_output_tokens": 10.0,
-      "tags": ["reasoning", "coding", "vision", "multimodal", "general", "premium", "smart"],
+      "tags": ["reasoning", "coding", "vision", "multimodal", "general", "premium", "smart", "legacy"],
       "description": "Reliable standard model for complex tasks."
+    },
+    {
+      "id": "gpt-5.5",
+      "provider": "OpenAI",
+      "source_type": "direct",
+      "type": "text",
+      "cost_per_1m_input_tokens": 5.0,
+      "cost_per_1m_output_tokens": 30.0,
+      "tags": ["reasoning", "coding", "vision", "multimodal", "smart", "agentic", "premium"],
+      "description": "Natively omnimodal flagship with 12M context. Optimized for agentic workflows and coding."
+    },
+    {
+      "id": "gpt-5.5-pro",
+      "provider": "OpenAI",
+      "source_type": "direct",
+      "type": "text",
+      "cost_per_1m_input_tokens": 30.0,
+      "cost_per_1m_output_tokens": 180.0,
+      "tags": ["reasoning", "premium", "precision", "smart", "enterprise", "agentic"],
+      "description": "Maximum precision variant for legal, analytics, and high-stakes environments."
+    },
+    {
+      "id": "dall-e-3",
+      "provider": "OpenAI",
+      "source_type": "direct",
+      "type": "image",
+      "cost_per_unit": 0.04,
+      "tags": ["image", "generation"],
+      "description": "Standard quality image generation (1024x1024) at $0.04/image. HD at $0.08."
+    },
+    {
+      "id": "gpt-image-1",
+      "provider": "OpenAI",
+      "source_type": "direct",
+      "type": "image",
+      "cost_per_unit": 0.02,
+      "tags": ["image", "generation", "cheap"],
+      "description": "Budget image generation starting at $0.02/image (low quality). Premium tiers available."
+    },
+    {
+      "id": "whisper",
+      "provider": "OpenAI",
+      "source_type": "direct",
+      "type": "audio",
+      "cost_per_unit": 0.006,
+      "tags": ["speech-to-text", "transcription", "audio", "cheap"],
+      "description": "Speech-to-text transcription at $0.006/minute (~$0.36/hour)."
+    },
+    {
+      "id": "tts-standard",
+      "provider": "OpenAI",
+      "source_type": "direct",
+      "type": "audio",
+      "cost_per_unit": 15.0,
+      "tags": ["text-to-speech", "audio", "generation"],
+      "description": "Text-to-speech at $15/1M characters. Multiple voice options."
+    },
+    {
+      "id": "tts-hd",
+      "provider": "OpenAI",
+      "source_type": "direct",
+      "type": "audio",
+      "cost_per_unit": 30.0,
+      "tags": ["text-to-speech", "audio", "generation", "premium"],
+      "description": "High-definition text-to-speech at $30/1M characters."
     },
     {
       "id": "openrouter/gpt-4o",
@@ -96,8 +254,28 @@
       "type": "text",
       "cost_per_1m_input_tokens": 0.14,
       "cost_per_1m_output_tokens": 0.28,
-      "tags": ["coding", "cheap", "reasoning"],
+      "tags": ["coding", "cheap", "reasoning", "legacy"],
       "description": "Extremely cost-effective model optimized for coding."
+    },
+    {
+      "id": "deepseek-v3",
+      "provider": "DeepSeek",
+      "source_type": "direct",
+      "type": "text",
+      "cost_per_1m_input_tokens": 0.14,
+      "cost_per_1m_output_tokens": 0.28,
+      "tags": ["general", "coding", "cheap"],
+      "description": "Latest general-purpose DeepSeek model. Same pricing as V2, improved performance."
+    },
+    {
+      "id": "deepseek-r1",
+      "provider": "DeepSeek",
+      "source_type": "direct",
+      "type": "text",
+      "cost_per_1m_input_tokens": 0.55,
+      "cost_per_1m_output_tokens": 2.19,
+      "tags": ["reasoning", "coding", "cheap", "smart"],
+      "description": "Advanced reasoning model. Excellent cost-to-performance for complex tasks."
     }
   ]
 }

@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "aicost": {
+      "source": "ufhouck/aicost",
+      "sourceType": "github",
+      "computedHash": "7fb3df7cb06cb837bba143358106f8117b546ede8e469d09096d7d7a0e02fb34"
+    }
+  }
+}

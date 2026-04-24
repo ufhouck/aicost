@@ -1,0 +1,21 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.ufhouck/aicost-cli",
+  "title": "AI-Cost-CLI",
+  "description": "Terminal-based AI API cost calculator, recommender, and mcp server.",
+  "repository": {
+    "url": "https://github.com/ufhouck/aicost",
+    "source": "github"
+  },
+  "version": "1.0.0",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "identifier": "aicost-cli",
+      "version": "1.0.0",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}
