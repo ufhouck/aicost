@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-24",
+  "last_updated": "2026-04-26",
   "models": [
     {
       "id": "claude-opus-4.6",
@@ -8,7 +8,15 @@
       "type": "text",
       "cost_per_1m_input_tokens": 30.0,
       "cost_per_1m_output_tokens": 150.0,
-      "tags": ["reasoning", "coding", "premium", "vision", "multimodal", "smart", "legacy"],
+      "tags": [
+        "reasoning",
+        "coding",
+        "premium",
+        "vision",
+        "multimodal",
+        "smart",
+        "legacy"
+      ],
       "description": "High intelligence flagship model for complex tasks."
     },
     {
@@ -18,7 +26,15 @@
       "type": "text",
       "cost_per_1m_input_tokens": 5.0,
       "cost_per_1m_output_tokens": 25.0,
-      "tags": ["reasoning", "coding", "premium", "vision", "multimodal", "smart", "agentic"],
+      "tags": [
+        "reasoning",
+        "coding",
+        "premium",
+        "vision",
+        "multimodal",
+        "smart",
+        "agentic"
+      ],
       "description": "Next-gen flagship with advanced coding, agentic workflows, and high-res vision. 6x cheaper than Opus 4.6."
     },
     {
@@ -28,7 +44,13 @@
       "type": "text",
       "cost_per_1m_input_tokens": 3.0,
       "cost_per_1m_output_tokens": 15.0,
-      "tags": ["coding", "reasoning", "fast", "general", "vision"],
+      "tags": [
+        "coding",
+        "reasoning",
+        "fast",
+        "general",
+        "vision"
+      ],
       "description": "Ideal balance of intelligence and speed, excellent at coding."
     },
     {
@@ -39,7 +61,11 @@
       "type": "text",
       "cost_per_1m_input_tokens": 3.0,
       "cost_per_1m_output_tokens": 15.0,
-      "tags": ["aggregator", "multiple-nodes", "unified-api"],
+      "tags": [
+        "aggregator",
+        "multiple-nodes",
+        "unified-api"
+      ],
       "description": "Claude 4.6 Sonnet via OpenRouter aggregator. Includes 5.5% credit fee."
     },
     {
@@ -49,7 +75,13 @@
       "type": "text",
       "cost_per_1m_input_tokens": 2.0,
       "cost_per_1m_output_tokens": 12.0,
-      "tags": ["long-context", "reasoning", "multimodal", "video", "audio"],
+      "tags": [
+        "long-context",
+        "reasoning",
+        "multimodal",
+        "video",
+        "audio"
+      ],
       "description": "Powerful model with massive context window."
     },
     {
@@ -58,8 +90,13 @@
       "source_type": "direct",
       "type": "text",
       "cost_per_1m_input_tokens": 0.25,
-      "cost_per_1m_output_tokens": 1.50,
-      "tags": ["fast", "cheap", "multimodal", "agentic"],
+      "cost_per_1m_output_tokens": 1.5,
+      "tags": [
+        "fast",
+        "cheap",
+        "multimodal",
+        "agentic"
+      ],
       "description": "Fastest and most budget-friendly Google model for high-volume workloads."
     },
     {
@@ -67,9 +104,15 @@
       "provider": "Google",
       "source_type": "direct",
       "type": "text",
-      "cost_per_1m_input_tokens": 0.30,
-      "cost_per_1m_output_tokens": 2.50,
-      "tags": ["fast", "cheap", "reasoning", "multimodal", "legacy"],
+      "cost_per_1m_input_tokens": 0.3,
+      "cost_per_1m_output_tokens": 2.5,
+      "tags": [
+        "fast",
+        "cheap",
+        "reasoning",
+        "multimodal",
+        "legacy"
+      ],
       "description": "Previous-gen hybrid reasoning model with 1M context. Being superseded by 3.1 series."
     },
     {
@@ -78,7 +121,12 @@
       "source_type": "direct",
       "type": "image",
       "cost_per_unit": 0.02,
-      "tags": ["image", "generation", "fast", "cheap"],
+      "tags": [
+        "image",
+        "generation",
+        "fast",
+        "cheap"
+      ],
       "description": "Fast image generation at $0.02/image. Best for prototyping and high-volume."
     },
     {
@@ -87,7 +135,10 @@
       "source_type": "direct",
       "type": "image",
       "cost_per_unit": 0.04,
-      "tags": ["image", "generation"],
+      "tags": [
+        "image",
+        "generation"
+      ],
       "description": "Standard quality image generation at $0.04/image."
     },
     {
@@ -96,7 +147,11 @@
       "source_type": "direct",
       "type": "image",
       "cost_per_unit": 0.06,
-      "tags": ["image", "generation", "premium"],
+      "tags": [
+        "image",
+        "generation",
+        "premium"
+      ],
       "description": "Highest quality image generation at $0.06/image."
     },
     {
@@ -104,8 +159,13 @@
       "provider": "Google",
       "source_type": "direct",
       "type": "video",
-      "cost_per_unit": 0.40,
-      "tags": ["video", "generation", "premium", "audio"],
+      "cost_per_unit": 0.4,
+      "tags": [
+        "video",
+        "generation",
+        "premium",
+        "audio"
+      ],
       "description": "High-fidelity video generation with native audio at $0.40/second."
     },
     {
@@ -114,7 +174,12 @@
       "source_type": "direct",
       "type": "video",
       "cost_per_unit": 0.05,
-      "tags": ["video", "generation", "fast", "cheap"],
+      "tags": [
+        "video",
+        "generation",
+        "fast",
+        "cheap"
+      ],
       "description": "Cost-effective 720p video generation at $0.05/second."
     },
     {
@@ -123,7 +188,12 @@
       "source_type": "direct",
       "type": "audio",
       "cost_per_unit": 0.08,
-      "tags": ["music", "audio", "generation", "premium"],
+      "tags": [
+        "music",
+        "audio",
+        "generation",
+        "premium"
+      ],
       "description": "Full-length music composition (up to 3 min) at $0.08/song with vocals and arrangements."
     },
     {
@@ -132,7 +202,13 @@
       "source_type": "direct",
       "type": "audio",
       "cost_per_unit": 0.04,
-      "tags": ["music", "audio", "generation", "fast", "cheap"],
+      "tags": [
+        "music",
+        "audio",
+        "generation",
+        "fast",
+        "cheap"
+      ],
       "description": "Short musical clips and loops (up to 30 sec) at $0.04/clip."
     },
     {
@@ -142,7 +218,16 @@
       "type": "text",
       "cost_per_1m_input_tokens": 2.5,
       "cost_per_1m_output_tokens": 10.0,
-      "tags": ["reasoning", "coding", "vision", "multimodal", "general", "premium", "smart", "legacy"],
+      "tags": [
+        "reasoning",
+        "coding",
+        "vision",
+        "multimodal",
+        "general",
+        "premium",
+        "smart",
+        "legacy"
+      ],
       "description": "Reliable standard model for complex tasks."
     },
     {
@@ -150,9 +235,17 @@
       "provider": "OpenAI",
       "source_type": "direct",
       "type": "text",
-      "cost_per_1m_input_tokens": 5.0,
-      "cost_per_1m_output_tokens": 30.0,
-      "tags": ["reasoning", "coding", "vision", "multimodal", "smart", "agentic", "premium"],
+      "cost_per_1m_input_tokens": 30.0,
+      "cost_per_1m_output_tokens": 180.0,
+      "tags": [
+        "reasoning",
+        "coding",
+        "vision",
+        "multimodal",
+        "smart",
+        "agentic",
+        "premium"
+      ],
       "description": "Natively omnimodal flagship with 12M context. Optimized for agentic workflows and coding."
     },
     {
@@ -162,7 +255,14 @@
       "type": "text",
       "cost_per_1m_input_tokens": 30.0,
       "cost_per_1m_output_tokens": 180.0,
-      "tags": ["reasoning", "premium", "precision", "smart", "enterprise", "agentic"],
+      "tags": [
+        "reasoning",
+        "premium",
+        "precision",
+        "smart",
+        "enterprise",
+        "agentic"
+      ],
       "description": "Maximum precision variant for legal, analytics, and high-stakes environments."
     },
     {
@@ -171,7 +271,10 @@
       "source_type": "direct",
       "type": "image",
       "cost_per_unit": 0.04,
-      "tags": ["image", "generation"],
+      "tags": [
+        "image",
+        "generation"
+      ],
       "description": "Standard quality image generation (1024x1024) at $0.04/image. HD at $0.08."
     },
     {
@@ -180,7 +283,11 @@
       "source_type": "direct",
       "type": "image",
       "cost_per_unit": 0.02,
-      "tags": ["image", "generation", "cheap"],
+      "tags": [
+        "image",
+        "generation",
+        "cheap"
+      ],
       "description": "Budget image generation starting at $0.02/image (low quality). Premium tiers available."
     },
     {
@@ -189,7 +296,12 @@
       "source_type": "direct",
       "type": "audio",
       "cost_per_unit": 0.006,
-      "tags": ["speech-to-text", "transcription", "audio", "cheap"],
+      "tags": [
+        "speech-to-text",
+        "transcription",
+        "audio",
+        "cheap"
+      ],
       "description": "Speech-to-text transcription at $0.006/minute (~$0.36/hour)."
     },
     {
@@ -198,7 +310,11 @@
       "source_type": "direct",
       "type": "audio",
       "cost_per_unit": 15.0,
-      "tags": ["text-to-speech", "audio", "generation"],
+      "tags": [
+        "text-to-speech",
+        "audio",
+        "generation"
+      ],
       "description": "Text-to-speech at $15/1M characters. Multiple voice options."
     },
     {
@@ -207,7 +323,12 @@
       "source_type": "direct",
       "type": "audio",
       "cost_per_unit": 30.0,
-      "tags": ["text-to-speech", "audio", "generation", "premium"],
+      "tags": [
+        "text-to-speech",
+        "audio",
+        "generation",
+        "premium"
+      ],
       "description": "High-definition text-to-speech at $30/1M characters."
     },
     {
@@ -218,7 +339,10 @@
       "type": "text",
       "cost_per_1m_input_tokens": 2.5,
       "cost_per_1m_output_tokens": 10.0,
-      "tags": ["aggregator", "unified-api"],
+      "tags": [
+        "aggregator",
+        "unified-api"
+      ],
       "description": "GPT-4o via OpenRouter. Base price + 5.5% platform fee."
     },
     {
@@ -227,7 +351,12 @@
       "source_type": "gateway",
       "type": "gateway",
       "fixed_monthly_cost": 499.0,
-      "tags": ["observability", "logs", "governance", "enterprise"],
+      "tags": [
+        "observability",
+        "logs",
+        "governance",
+        "enterprise"
+      ],
       "description": "Enterprise AI Gateway. Pricing based on recorded logs (~$499/mo Pro tier)."
     },
     {
@@ -236,7 +365,12 @@
       "source_type": "gateway",
       "type": "gateway",
       "fixed_monthly_cost": 250.0,
-      "tags": ["self-hosted", "proxy", "sso", "audit-logs"],
+      "tags": [
+        "self-hosted",
+        "proxy",
+        "sso",
+        "audit-logs"
+      ],
       "description": "Managed LiteLLM Proxy for teams. Base price for Enterprise Basic."
     },
     {
@@ -244,7 +378,11 @@
       "provider": "Martian",
       "source_type": "gateway",
       "type": "gateway",
-      "tags": ["intelligent-routing", "cost-saving", "enterprise"],
+      "tags": [
+        "intelligent-routing",
+        "cost-saving",
+        "enterprise"
+      ],
       "description": "Dynamic model router. Pricing is custom/enterprise focused."
     },
     {
@@ -254,7 +392,12 @@
       "type": "text",
       "cost_per_1m_input_tokens": 0.14,
       "cost_per_1m_output_tokens": 0.28,
-      "tags": ["coding", "cheap", "reasoning", "legacy"],
+      "tags": [
+        "coding",
+        "cheap",
+        "reasoning",
+        "legacy"
+      ],
       "description": "Extremely cost-effective model optimized for coding."
     },
     {
@@ -262,9 +405,13 @@
       "provider": "DeepSeek",
       "source_type": "direct",
       "type": "text",
-      "cost_per_1m_input_tokens": 0.14,
-      "cost_per_1m_output_tokens": 0.28,
-      "tags": ["general", "coding", "cheap"],
+      "cost_per_1m_input_tokens": 0.135,
+      "cost_per_1m_output_tokens": 0.5,
+      "tags": [
+        "general",
+        "coding",
+        "cheap"
+      ],
       "description": "Latest general-purpose DeepSeek model. Same pricing as V2, improved performance."
     },
     {
@@ -272,9 +419,14 @@
       "provider": "DeepSeek",
       "source_type": "direct",
       "type": "text",
-      "cost_per_1m_input_tokens": 0.55,
-      "cost_per_1m_output_tokens": 2.19,
-      "tags": ["reasoning", "coding", "cheap", "smart"],
+      "cost_per_1m_input_tokens": 0.3,
+      "cost_per_1m_output_tokens": 1.1,
+      "tags": [
+        "reasoning",
+        "coding",
+        "cheap",
+        "smart"
+      ],
       "description": "Advanced reasoning model. Excellent cost-to-performance for complex tasks."
     }
   ]
