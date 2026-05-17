@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-10",
+  "last_updated": "2026-05-17",
   "models": [
     {
       "id": "claude-opus-4.6",
@@ -24,8 +24,8 @@
       "provider": "Anthropic",
       "source_type": "direct",
       "type": "text",
-      "cost_per_1m_input_tokens": 5.0,
-      "cost_per_1m_output_tokens": 25.0,
+      "cost_per_1m_input_tokens": 30.0,
+      "cost_per_1m_output_tokens": 150.0,
       "tags": [
         "reasoning",
         "coding",
