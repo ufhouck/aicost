@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-17",
+  "last_updated": "2026-05-31",
   "models": [
     {
       "id": "claude-opus-4.6",
@@ -216,8 +216,8 @@
       "provider": "OpenAI",
       "source_type": "direct",
       "type": "text",
-      "cost_per_1m_input_tokens": 2.5,
-      "cost_per_1m_output_tokens": 10.0,
+      "cost_per_1m_input_tokens": 0.15,
+      "cost_per_1m_output_tokens": 0.6,
       "tags": [
         "reasoning",
         "coding",
@@ -337,8 +337,8 @@
       "source_type": "aggregator",
       "platform_fee": 0.055,
       "type": "text",
-      "cost_per_1m_input_tokens": 2.5,
-      "cost_per_1m_output_tokens": 10.0,
+      "cost_per_1m_input_tokens": 0.15,
+      "cost_per_1m_output_tokens": 0.6,
       "tags": [
         "aggregator",
         "unified-api"
