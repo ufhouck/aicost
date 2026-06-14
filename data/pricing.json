@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-31",
+  "last_updated": "2026-06-14",
   "models": [
     {
       "id": "claude-opus-4.6",
@@ -405,8 +405,8 @@
       "provider": "DeepSeek",
       "source_type": "direct",
       "type": "text",
-      "cost_per_1m_input_tokens": 0.135,
-      "cost_per_1m_output_tokens": 0.5,
+      "cost_per_1m_input_tokens": 0.2288,
+      "cost_per_1m_output_tokens": 0.3432,
       "tags": [
         "general",
         "coding",
