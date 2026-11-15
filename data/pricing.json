@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-01",
+  "last_updated": "2026-11-15",
   "models": [
     {
       "id": "claude-opus-4.6",
@@ -419,8 +419,8 @@
       "provider": "DeepSeek",
       "source_type": "direct",
       "type": "text",
-      "cost_per_1m_input_tokens": 0.5,
-      "cost_per_1m_output_tokens": 2.15,
+      "cost_per_1m_input_tokens": 0.571,
+      "cost_per_1m_output_tokens": 2.286,
       "tags": [
         "reasoning",
         "coding",
