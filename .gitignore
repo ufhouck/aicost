@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.so
+.pytest_cache/
 
 # Distribution / Packaging
 dist/
@@ -10,6 +11,13 @@ build/
 *.egg-info/
 *.egg
 .eggs/
+*.tgz
+
+# Node / NPM MCP Server build artifacts
+npm/node_modules/
+npm/dist/
+npm/data/
+npm/LICENSE
 
 # Virtual environments
 venv/

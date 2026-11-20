@@ -1,4 +1,4 @@
-name: Publish to PyPI
+name: Publish to PyPI & npm
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - "v*"
 
 jobs:
-  publish:
+  publish-pypi:
     runs-on: ubuntu-latest
     permissions:
       id-token: write  # Required for PyPI Trusted Publisher (OIDC)
@@ -19,11 +19,43 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install build tools
-        run: pip install build
+      - name: Install build tools & verify tests
+        run: |
+          pip install build pytest
+          pip install -e .
+          pytest
 
       - name: Build package
         run: python -m build
 
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
+
+  publish-npm:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write  # Supports npm provenance / OIDC
+      contents: read
+    defaults:
+      run:
+        working-directory: npm
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install & Build aicost-mcp
+        run: |
+          npm install
+          npm run build
+
+      - name: Publish to npm
+        if: env.NODE_AUTH_TOKEN != ''
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --provenance --access public

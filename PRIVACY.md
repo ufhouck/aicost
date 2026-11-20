@@ -1,10 +1,10 @@
 # Privacy Policy
 
-**Last updated:** April 24, 2026
+**Last updated:** November 20, 2026
 
 ## Overview
 
-AI-Cost-CLI is a local-first, open-source tool. We are committed to user privacy and data transparency.
+AI-Cost-CLI (`aicost-cli`) and `aicost-mcp` are local-first, open-source tools. We are committed to user privacy and data transparency.
 
 ## Data Collection
 
@@ -22,23 +22,24 @@ AI-Cost-CLI is a local-first, open-source tool. We are committed to user privacy
 
 ## External Network Requests
 
-AI-Cost-CLI makes **two types** of outbound HTTP requests, both for fetching publicly available data:
+Both the Python CLI and the Node.js MCP server make **two types** of outbound HTTPS requests, strictly for fetching publicly available reference data:
 
 | Request | URL | Data Sent | Purpose |
 |---------|-----|-----------|---------|
-| Currency Rates | `cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/` | None | Fetching exchange rates |
+| Currency Rates (Primary) | `cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/` | None | Fetching 200+ exchange rates |
+| Currency Rates (Fallback) | `latest.currency-api.pages.dev` / `api.frankfurter.app` | None | Automatic mirror fallback if primary CDN is unreachable |
 | Pricing Sync | `raw.githubusercontent.com/ufhouck/aicost/main/data/pricing.json` | None | Fetching latest AI model pricing |
 
 **No cookies, tokens, user identifiers, or personal data** are included in these requests.
 
 ## Local Cache
 
-Cached data is stored in `~/.aicost/` on your machine:
+Cached data is shared between `aicost-cli` and `aicost-mcp` in `~/.aicost/` on your machine:
 
-```
+```text
 ~/.aicost/
-├── pricing_cache.json    # Cached model pricing (refreshed weekly)
-└── exchange_cache.json   # Cached exchange rates (refreshed daily)
+├── pricing_cache.json    # Cached model pricing (7-day TTL)
+└── exchange_cache.json   # Cached exchange rates (24-hour TTL)
 ```
 
 You can delete this directory at any time to clear all cached data:
@@ -48,7 +49,7 @@ rm -rf ~/.aicost
 
 ## MCP Server Mode
 
-When running as an MCP server (`aicost mcp`), the tool communicates exclusively via **local stdio** (standard input/output). No network server is started, and no ports are opened.
+When running as an MCP server (`npx -y aicost-mcp` or `aicost mcp`), the tool communicates exclusively via **local stdio** (standard input/output). No network server is started, and no ports are opened.
 
 ## Third-Party Services
 
