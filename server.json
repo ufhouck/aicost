@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.ufhouck/aicost-cli",
   "title": "AI-Cost-CLI & MCP",
-  "description": "AI API cost calculator, budget estimator & MCP server. 60+ curated & 470+ live models, 200+ currencies.",
+  "description": "AI API cost calculator, budget estimator & MCP server. 470+ live models across 200+ currencies.",
   "repository": {
     "url": "https://github.com/ufhouck/aicost",
     "source": "github"
