@@ -2,18 +2,18 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.ufhouck/aicost-cli",
   "title": "AI-Cost-CLI & MCP",
-  "description": "AI API cost calculator, monthly budget estimator, recommender & MCP server across 200+ currencies.",
+  "description": "AI API cost calculator, budget estimator & MCP server. 60+ curated & 470+ live models, 200+ currencies.",
   "repository": {
     "url": "https://github.com/ufhouck/aicost",
     "source": "github"
   },
-  "version": "1.2.0",
+  "version": "1.3.0",
   "packages": [
     {
       "registryType": "npm",
       "registryBaseUrl": "https://registry.npmjs.org",
       "identifier": "aicost-mcp",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "runtimeHint": "npx",
       "transport": {
         "type": "stdio"
@@ -23,7 +23,7 @@
       "registryType": "pypi",
       "registryBaseUrl": "https://pypi.org",
       "identifier": "aicost-cli",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "runtimeHint": "uvx",
       "packageArguments": [
         {

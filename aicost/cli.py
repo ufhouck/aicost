@@ -16,6 +16,7 @@ from aicost import __version__
 from aicost.calculator import (
     calculate_cost_breakdown,
     estimate_monthly_cost,
+    fetch_live_catalog,
     fetch_remote_pricing,
     filter_models,
     format_unit_label,
@@ -84,19 +85,23 @@ def _format_context_window(ctx: Optional[int]) -> str:
 @app.command(name="list")
 def list_models(
     currency: str = typer.Option("USD", "--currency", "-c", help="Target currency (e.g., USD, TRY, EUR)"),
-    provider: Optional[str] = typer.Option(None, "--provider", "-p", help="Filter by provider (e.g., OpenAI, Google)"),
+    provider: Optional[str] = typer.Option(None, "--provider", "-p", help="Filter by provider (e.g., OpenAI, Anthropic, Google, xAI)"),
     model_type: Optional[str] = typer.Option(None, "--type", "-t", help="Filter by type (text, image, video, audio, gateway)"),
     tag: Optional[str] = typer.Option(None, "--tag", help="Filter by capability tag (e.g., coding, cheap, agentic)"),
     sort_by: Optional[str] = typer.Option(None, "--sort", "-s", help="Sort by: id, provider, input, output"),
-    hide_legacy: bool = typer.Option(False, "--hide-legacy", help="Hide legacy/superseded models"),
+    include_legacy: bool = typer.Option(False, "--include-legacy", help="Include older/superseded legacy models"),
+    hide_legacy: bool = typer.Option(False, "--hide-legacy", hidden=True),
+    live: bool = typer.Option(False, "--live", help="Include 400+ live models from OpenRouter catalog"),
     as_json: bool = typer.Option(False, "--json", help="Output structured JSON"),
 ) -> None:
     """Lists available AI models and their effective pricing."""
+    show_legacy = include_legacy and not hide_legacy
     models = filter_models(
         provider=provider,
         model_type=model_type,
         tag=tag,
-        include_legacy=not hide_legacy,
+        include_legacy=show_legacy,
+        include_live=live,
         sort_by=sort_by,
     )
     meta = get_pricing_metadata()
@@ -442,29 +447,34 @@ def recommend(
 def sync(
     as_json: bool = typer.Option(False, "--json", help="Output structured JSON"),
 ) -> None:
-    """Manually triggers a pricing and exchange rate update from remote sources."""
+    """Manually triggers a pricing, live 400+ catalog, and exchange rate update."""
     if not as_json:
-        console.print("[yellow]Syncing latest pricing data and exchange rates...[/yellow]")
+        console.print("[yellow]Syncing curated pricing, live 400+ model catalog, and exchange rates...[/yellow]")
 
     data = fetch_remote_pricing()
+    live_models = fetch_live_catalog()
     rates = refresh_rates()
 
     if as_json:
         _print_json({
             "pricing_synced": bool(data),
             "last_updated": data.get("last_updated") if data else None,
+            "curated_count": len(data.get("models", [])) if data else 0,
+            "live_catalog_synced": len(live_models) > 0,
+            "live_catalog_count": len(live_models),
             "currencies_synced": len(rates) > 1,
             "currency_count": len(rates),
         })
-        if not data:
+        if not data and not live_models:
             raise typer.Exit(1)
         return
 
-    if data:
-        last_updated = data.get("last_updated", "Unknown")
+    if data or live_models:
+        last_updated = data.get("last_updated", "Live") if data else "Live"
+        curated_n = len(data.get("models", [])) if data else get_pricing_metadata().get("model_count", 0)
         console.print(
             f"[bold green]Success![/bold green] Pricing updated to [cyan]{last_updated}[/cyan] "
-            f"({len(rates)} currencies cached)."
+            f"({curated_n} curated + {len(live_models)} live models, {len(rates)} currencies cached)."
         )
     else:
         console.print("[bold red]Error:[/bold red] Could not fetch remote pricing. Check your internet connection.")

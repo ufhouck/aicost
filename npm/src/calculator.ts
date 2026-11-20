@@ -89,14 +89,59 @@ export function filterModels(
     .sort((a, b) => effectiveSortCost(a) - effectiveSortCost(b));
 }
 
-export function findModelById(models: ModelEntry[], modelId: string): ModelEntry | undefined {
-  const query = modelId.trim().toLowerCase();
-  if (!query) return undefined;
-
+function matchInList(models: ModelEntry[], query: string): ModelEntry | undefined {
   const exact = models.find((m) => m.id.toLowerCase() === query);
   if (exact) return exact;
 
+  const byOrId = models.find((m) => (m.openrouter_id ?? "").toLowerCase() === query);
+  if (byOrId) return byOrId;
+
   return models.find((m) => (m.aliases ?? []).some((a) => a.toLowerCase() === query));
+}
+
+export function synthesizeOpenRouterAggregator(
+  baseModel: ModelEntry,
+  requestedId: string
+): ModelEntry {
+  const cleanSuffix = requestedId.replace(/^openrouter\//i, "");
+  const tags = (baseModel.tags ?? []).filter((t) => t !== "direct");
+  if (!tags.includes("aggregator")) tags.unshift("aggregator");
+  const { batch_discount: _unused, ...rest } = baseModel;
+  return {
+    ...rest,
+    id: `openrouter/${cleanSuffix}`,
+    provider: "OpenRouter",
+    source_type: "aggregator",
+    platform_fee: 0.055,
+    tags,
+    description: `${baseModel.id} via OpenRouter aggregator (+5.5% platform fee).`,
+  };
+}
+
+export function findModelById(
+  models: ModelEntry[],
+  modelId: string,
+  liveModels: ModelEntry[] = []
+): ModelEntry | undefined {
+  const query = modelId.trim().toLowerCase();
+  if (!query) return undefined;
+
+  const curatedHit = matchInList(models, query);
+  if (curatedHit) return curatedHit;
+
+  if (query.startsWith("openrouter/")) {
+    const subQuery = query.slice("openrouter/".length);
+    const curatedBase = matchInList(models, subQuery);
+    if (curatedBase && (curatedBase.type ?? "text") === "text") {
+      return synthesizeOpenRouterAggregator(curatedBase, query);
+    }
+    const liveBase = matchInList(liveModels, subQuery);
+    if (liveBase) {
+      return synthesizeOpenRouterAggregator(liveBase, query);
+    }
+  }
+
+  return matchInList(liveModels, query);
 }
 
 function diceSimilarity(a: string, b: string): number {
@@ -201,8 +246,16 @@ export function calculateCostBreakdown(
   } else {
     const unitRate = Number(model.cost_per_unit ?? 0);
     rawBaseUsd = units * unitRate;
+    if (options.batch && Number(model.batch_discount ?? 0) > 0) {
+      batchApplied = true;
+      batchDiscountRate = Number(model.batch_discount);
+      batchSavingsUsd = rawBaseUsd * batchDiscountRate;
+    }
     const capType = mType.charAt(0).toUpperCase() + mType.slice(1);
     usageSummary = `${capType}: ${units} ${unitLabel}`;
+    if (batchApplied) {
+      usageSummary += ` [Batch -${Math.round(batchDiscountRate * 100)}%]`;
+    }
   }
 
   const baseUsd = rawBaseUsd - batchSavingsUsd;

@@ -1,6 +1,6 @@
 [project]
 name = "aicost-cli"
-version = "1.2.0"
+version = "1.3.0"
 description = "Terminal-based AI API Cost Calculator, Converter, Budget Estimator & MCP Server. Compare providers, convert currencies, and get model recommendations."
 license = {text = "MIT"}
 authors = [

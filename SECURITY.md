@@ -31,7 +31,8 @@ AI-Cost-CLI (`aicost-cli`) and the npm MCP server (`aicost-mcp`) make the follow
 |---------|-------------|---------|
 | Currency rates (Primary) | `cdn.jsdelivr.net` (`@fawazahmed0/currency-api`) | Real-time currency conversion (200+ currencies) |
 | Currency rates (Fallback) | `latest.currency-api.pages.dev` / `api.frankfurter.app` | Resilient exchange rate fallback |
-| Pricing sync | `raw.githubusercontent.com` | Fetching latest model pricing |
+| Pricing sync | `raw.githubusercontent.com` | Fetching latest curated model pricing |
+| Live catalog fallback | `openrouter.ai/api/v1/models` | Public unauthenticated catalog of 470+ live models |
 
 - **No authentication tokens or API keys** are transmitted.
 - **No personal data** is collected or sent.

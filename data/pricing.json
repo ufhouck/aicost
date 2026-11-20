@@ -1,75 +1,318 @@
 {
-  "schema_version": "2.0",
+  "schema_version": "2.1",
   "last_updated": "2026-11-20",
   "models": [
     {
-      "id": "claude-opus-4.6",
-      "aliases": [
-        "opus-4.6"
-      ],
-      "openrouter_id": "anthropic/claude-opus-4.6",
-      "provider": "Anthropic",
+      "id": "gpt-6.2-astra-pro",
+      "openrouter_id": "openai/gpt-6.2-astra-pro",
+      "provider": "OpenAI",
       "source_type": "direct",
       "type": "text",
       "billing_unit": "1m_tokens",
-      "context_window": 200000,
-      "cost_per_1m_input_tokens": 5.0,
-      "cost_per_1m_cached_input_tokens": 0.5,
-      "cost_per_1m_output_tokens": 25.0,
-      "batch_discount": 0.5,
+      "context_window": 1050000,
+      "cost_per_1m_input_tokens": 8.0,
+      "cost_per_1m_output_tokens": 40.0,
       "tags": [
-        "reasoning",
-        "coding",
-        "premium",
         "vision",
         "multimodal",
-        "smart",
-        "legacy"
+        "long-context",
+        "premium",
+        "reasoning",
+        "coding"
       ],
-      "description": "High intelligence flagship model for complex tasks."
+      "description": "GPT-6.2 Astra Pro (auto-discovered via weekly sync).",
+      "cost_per_1m_cached_input_tokens": 0.4,
+      "batch_discount": 0.5
     },
     {
-      "id": "claude-opus-4.7",
-      "aliases": [
-        "opus-4.7",
-        "claude-opus"
-      ],
-      "openrouter_id": "anthropic/claude-opus-4.7",
-      "provider": "Anthropic",
+      "id": "gpt-6.2-sol-pro",
+      "openrouter_id": "openai/gpt-6.2-sol-pro",
+      "provider": "OpenAI",
       "source_type": "direct",
       "type": "text",
       "billing_unit": "1m_tokens",
-      "context_window": 200000,
-      "cost_per_1m_input_tokens": 5.0,
-      "cost_per_1m_cached_input_tokens": 0.5,
-      "cost_per_1m_output_tokens": 25.0,
+      "context_window": 1050000,
+      "cost_per_1m_input_tokens": 2.0,
+      "cost_per_1m_output_tokens": 10.0,
+      "tags": [
+        "vision",
+        "multimodal",
+        "long-context",
+        "reasoning",
+        "coding"
+      ],
+      "description": "GPT-6.2 Sol Pro (auto-discovered via weekly sync).",
+      "cost_per_1m_cached_input_tokens": 0.1,
+      "batch_discount": 0.5
+    },
+    {
+      "id": "gemini-omni-1.1-flash",
+      "openrouter_id": "google/gemini-omni-1.1-flash",
+      "provider": "Google",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 131072,
+      "cost_per_1m_input_tokens": 1.5,
+      "cost_per_1m_output_tokens": 9.0,
+      "tags": [
+        "vision",
+        "multimodal",
+        "fast",
+        "general"
+      ],
+      "description": "Gemini Omni 1.1 Flash (auto-discovered via weekly sync)."
+    },
+    {
+      "id": "gpt-6.1-terra-pro",
+      "openrouter_id": "openai/gpt-6.1-terra-pro",
+      "provider": "OpenAI",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 1050000,
+      "cost_per_1m_input_tokens": 1.0,
+      "cost_per_1m_output_tokens": 5.0,
+      "tags": [
+        "vision",
+        "multimodal",
+        "long-context",
+        "reasoning",
+        "coding"
+      ],
+      "description": "GPT-6.1 Terra Pro (auto-discovered via weekly sync).",
+      "cost_per_1m_cached_input_tokens": 0.05,
+      "batch_discount": 0.5
+    },
+    {
+      "id": "gpt-6.2-astra",
+      "aliases": [
+        "gpt-6-astra",
+        "astra",
+        "gpt-6.2"
+      ],
+      "openrouter_id": "openai/gpt-6.2-astra",
+      "provider": "OpenAI",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 1050000,
+      "cost_per_1m_input_tokens": 8.0,
+      "cost_per_1m_cached_input_tokens": 0.4,
+      "cost_per_1m_output_tokens": 40.0,
       "batch_discount": 0.5,
       "tags": [
         "reasoning",
         "coding",
-        "premium",
         "vision",
         "multimodal",
+        "agentic",
+        "premium",
+        "smart",
+        "long-context"
+      ],
+      "description": "OpenAI's frontier GPT-6.2 flagship for complex reasoning, coding, and autonomous agents (1.05M context)."
+    },
+    {
+      "id": "gpt-6.2-sol",
+      "aliases": [
+        "gpt-6-sol",
+        "sol"
+      ],
+      "openrouter_id": "openai/gpt-6.2-sol",
+      "provider": "OpenAI",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 1050000,
+      "cost_per_1m_input_tokens": 2.0,
+      "cost_per_1m_cached_input_tokens": 0.1,
+      "cost_per_1m_output_tokens": 10.0,
+      "batch_discount": 0.5,
+      "tags": [
+        "coding",
+        "reasoning",
+        "vision",
+        "multimodal",
+        "general",
+        "fast",
+        "agentic",
+        "long-context"
+      ],
+      "description": "Balanced GPT-6.2 daily driver offering frontier multimodal intelligence at $2/$10 per 1M tokens."
+    },
+    {
+      "id": "gpt-6.1-terra",
+      "aliases": [
+        "terra",
+        "gpt-6-terra"
+      ],
+      "openrouter_id": "openai/gpt-6.1-terra",
+      "provider": "OpenAI",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 1050000,
+      "cost_per_1m_input_tokens": 1.0,
+      "cost_per_1m_cached_input_tokens": 0.05,
+      "cost_per_1m_output_tokens": 5.0,
+      "batch_discount": 0.5,
+      "tags": [
+        "general",
+        "coding",
+        "fast",
+        "multimodal",
+        "agentic",
+        "long-context"
+      ],
+      "description": "Mid-tier GPT-6 series workhorse optimized for high-throughput production apps."
+    },
+    {
+      "id": "gpt-6-luna",
+      "aliases": [
+        "luna",
+        "gpt-6-mini"
+      ],
+      "openrouter_id": "openai/gpt-6-luna",
+      "provider": "OpenAI",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 1050000,
+      "cost_per_1m_input_tokens": 0.1,
+      "cost_per_1m_cached_input_tokens": 0.01,
+      "cost_per_1m_output_tokens": 0.5,
+      "batch_discount": 0.5,
+      "tags": [
+        "fast",
+        "cheap",
+        "general",
+        "multimodal",
+        "agentic",
+        "long-context"
+      ],
+      "description": "Ultra-low-cost GPT-6 model ($0.10/$0.50) built for massive scale, classification, and fast agents."
+    },
+    {
+      "id": "o3",
+      "aliases": [
+        "gpt-o3",
+        "openai-o3"
+      ],
+      "openrouter_id": "openai/o3",
+      "provider": "OpenAI",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 200000,
+      "cost_per_1m_input_tokens": 2.0,
+      "cost_per_1m_cached_input_tokens": 0.5,
+      "cost_per_1m_output_tokens": 8.0,
+      "batch_discount": 0.5,
+      "tags": [
+        "reasoning",
+        "coding",
+        "math",
+        "science",
         "smart",
         "agentic"
       ],
-      "description": "Next-gen flagship with advanced coding, agentic workflows, and high-res vision. 6x cheaper than Opus 4.6."
+      "description": "Dedicated chain-of-thought reasoning model for math, STEM, and algorithmic coding."
     },
     {
-      "id": "claude-sonnet-4.6",
+      "id": "o3-pro",
       "aliases": [
-        "sonnet-4.6",
-        "claude-sonnet"
+        "openai-o3-pro"
       ],
-      "openrouter_id": "anthropic/claude-sonnet-4.6",
-      "provider": "Anthropic",
+      "openrouter_id": "openai/o3-pro",
+      "provider": "OpenAI",
       "source_type": "direct",
       "type": "text",
       "billing_unit": "1m_tokens",
       "context_window": 200000,
-      "cost_per_1m_input_tokens": 3.0,
-      "cost_per_1m_cached_input_tokens": 0.3,
-      "cost_per_1m_output_tokens": 15.0,
+      "cost_per_1m_input_tokens": 20.0,
+      "cost_per_1m_output_tokens": 80.0,
+      "batch_discount": 0.5,
+      "tags": [
+        "reasoning",
+        "precision",
+        "science",
+        "math",
+        "premium",
+        "enterprise"
+      ],
+      "description": "High-compute o3 reasoning tier for mission-critical scientific, legal, and financial verification."
+    },
+    {
+      "id": "claude-fable-5.2",
+      "aliases": [
+        "fable-5.2",
+        "claude-fable"
+      ],
+      "openrouter_id": "anthropic/claude-fable-5.2",
+      "provider": "Anthropic",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 1000000,
+      "cost_per_1m_input_tokens": 8.0,
+      "cost_per_1m_cached_input_tokens": 0.2,
+      "cost_per_1m_output_tokens": 40.0,
+      "batch_discount": 0.5,
+      "tags": [
+        "reasoning",
+        "coding",
+        "agentic",
+        "premium",
+        "smart",
+        "vision",
+        "long-context"
+      ],
+      "description": "Anthropic's apex reasoning & research tier above Opus with 1M context and deep autonomous planning."
+    },
+    {
+      "id": "claude-opus-5.5",
+      "aliases": [
+        "opus-5.5",
+        "claude-opus"
+      ],
+      "openrouter_id": "anthropic/claude-opus-5.5",
+      "provider": "Anthropic",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 1000000,
+      "cost_per_1m_input_tokens": 4.0,
+      "cost_per_1m_cached_input_tokens": 0.2,
+      "cost_per_1m_output_tokens": 20.0,
+      "batch_discount": 0.5,
+      "tags": [
+        "reasoning",
+        "coding",
+        "agentic",
+        "vision",
+        "multimodal",
+        "premium",
+        "smart",
+        "long-context"
+      ],
+      "description": "Flagship Claude 5.5 Opus for complex software engineering and multi-agent orchestration (1M context)."
+    },
+    {
+      "id": "claude-sonnet-5.5",
+      "aliases": [
+        "sonnet-5.5",
+        "claude-sonnet"
+      ],
+      "openrouter_id": "anthropic/claude-sonnet-5.5",
+      "provider": "Anthropic",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 1000000,
+      "cost_per_1m_input_tokens": 2.0,
+      "cost_per_1m_cached_input_tokens": 0.1,
+      "cost_per_1m_output_tokens": 10.0,
       "batch_discount": 0.5,
       "tags": [
         "coding",
@@ -77,108 +320,634 @@
         "fast",
         "general",
         "vision",
-        "agentic"
+        "agentic",
+        "long-context"
       ],
-      "description": "Ideal balance of intelligence and speed, excellent at coding."
+      "description": "Industry-standard coding and agentic model balancing Opus-class intelligence with fast latency ($2/$10)."
     },
     {
-      "id": "openrouter/claude-sonnet-4.6",
+      "id": "claude-haiku-5.5",
       "aliases": [
-        "or/claude-sonnet-4.6"
+        "haiku-5.5",
+        "claude-haiku"
       ],
-      "openrouter_id": "anthropic/claude-sonnet-4.6",
+      "openrouter_id": "anthropic/claude-haiku-5.5",
+      "provider": "Anthropic",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 1000000,
+      "cost_per_1m_input_tokens": 0.1,
+      "cost_per_1m_cached_input_tokens": 0.01,
+      "cost_per_1m_output_tokens": 0.5,
+      "batch_discount": 0.5,
+      "tags": [
+        "fast",
+        "cheap",
+        "coding",
+        "general",
+        "vision",
+        "agentic",
+        "long-context"
+      ],
+      "description": "Ultra-fast, sub-cent Claude 5.5 Haiku ($0.10/$0.50) with 1M context for high-frequency subagents."
+    },
+    {
+      "id": "gemini-4-neon",
+      "aliases": [
+        "gemini-neon",
+        "neon"
+      ],
+      "openrouter_id": "google/gemini-4-neon",
+      "provider": "Google",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 1048576,
+      "cost_per_1m_input_tokens": 3.0,
+      "cost_per_1m_cached_input_tokens": 0.15,
+      "cost_per_1m_output_tokens": 15.0,
+      "batch_discount": 0.5,
+      "tags": [
+        "reasoning",
+        "coding",
+        "multimodal",
+        "vision",
+        "video",
+        "audio",
+        "agentic",
+        "premium",
+        "long-context"
+      ],
+      "description": "Google's top-tier Gemini 4 Neon flagship for deep multimodal reasoning and complex engineering."
+    },
+    {
+      "id": "gemini-4-carbon",
+      "aliases": [
+        "gemini-carbon",
+        "carbon",
+        "gemini-4-pro"
+      ],
+      "openrouter_id": "google/gemini-4-carbon",
+      "provider": "Google",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 1048576,
+      "cost_per_1m_input_tokens": 2.0,
+      "cost_per_1m_cached_input_tokens": 0.1,
+      "cost_per_1m_output_tokens": 10.0,
+      "batch_discount": 0.5,
+      "tags": [
+        "reasoning",
+        "coding",
+        "multimodal",
+        "vision",
+        "video",
+        "audio",
+        "agentic",
+        "long-context"
+      ],
+      "description": "Gemini 4 Carbon flagship tuned for agentic coding, tool use, and native multimodal workflows."
+    },
+    {
+      "id": "gemini-4-argon",
+      "aliases": [
+        "gemini-argon",
+        "argon"
+      ],
+      "openrouter_id": "google/gemini-4-argon",
+      "provider": "Google",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 1048576,
+      "cost_per_1m_input_tokens": 2.0,
+      "cost_per_1m_cached_input_tokens": 0.1,
+      "cost_per_1m_output_tokens": 10.0,
+      "batch_discount": 0.5,
+      "tags": [
+        "reasoning",
+        "multimodal",
+        "vision",
+        "long-context",
+        "smart"
+      ],
+      "description": "Gemini 4 Argon variant optimized for analytical synthesis and long-document comprehension."
+    },
+    {
+      "id": "gemini-4-hydrogen",
+      "aliases": [
+        "gemini-hydrogen",
+        "hydrogen"
+      ],
+      "openrouter_id": "google/gemini-4-hydrogen",
+      "provider": "Google",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 1048576,
+      "cost_per_1m_input_tokens": 1.5,
+      "cost_per_1m_cached_input_tokens": 0.075,
+      "cost_per_1m_output_tokens": 7.5,
+      "batch_discount": 0.5,
+      "tags": [
+        "fast",
+        "coding",
+        "multimodal",
+        "vision",
+        "agentic",
+        "long-context"
+      ],
+      "description": "Efficient Gemini 4 Hydrogen tier delivering Gemini 4 quality at lower latency and cost ($1.50/$7.50)."
+    },
+    {
+      "id": "gemini-3.8-flash",
+      "aliases": [
+        "gemini-flash",
+        "flash-3.8"
+      ],
+      "openrouter_id": "google/gemini-3.8-flash",
+      "provider": "Google",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 1048576,
+      "cost_per_1m_input_tokens": 0.825,
+      "cost_per_1m_cached_input_tokens": 0.0825,
+      "cost_per_1m_output_tokens": 4.125,
+      "batch_discount": 0.5,
+      "tags": [
+        "fast",
+        "multimodal",
+        "vision",
+        "audio",
+        "video",
+        "agentic",
+        "long-context"
+      ],
+      "description": "High-speed multimodal Flash workhorse with 1M context window and 90% context cache savings."
+    },
+    {
+      "id": "gemini-omni-1.2-flash",
+      "aliases": [
+        "gemini-omni"
+      ],
+      "openrouter_id": "google/gemini-omni-1.2-flash",
+      "provider": "Google",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 131072,
+      "cost_per_1m_input_tokens": 1.5,
+      "cost_per_1m_output_tokens": 9.0,
+      "tags": [
+        "multimodal",
+        "video",
+        "audio",
+        "vision",
+        "fast",
+        "realtime"
+      ],
+      "description": "Real-time omnimodal streaming model for live voice, video, and interactive agents."
+    },
+    {
+      "id": "grok-4.7",
+      "aliases": [
+        "grok",
+        "grok-4"
+      ],
+      "openrouter_id": "x-ai/grok-4.7",
+      "provider": "xAI",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 500000,
+      "cost_per_1m_input_tokens": 2.0,
+      "cost_per_1m_cached_input_tokens": 0.5,
+      "cost_per_1m_output_tokens": 6.0,
+      "batch_discount": 0.2,
+      "tags": [
+        "reasoning",
+        "coding",
+        "smart",
+        "agentic",
+        "vision",
+        "long-context"
+      ],
+      "description": "xAI's flagship Grok 4.7 with strong coding, real-time reasoning, and competitive $6/1M output pricing."
+    },
+    {
+      "id": "grok-4.3",
+      "aliases": [
+        "grok-mini"
+      ],
+      "openrouter_id": "x-ai/grok-4.3",
+      "provider": "xAI",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 1000000,
+      "cost_per_1m_input_tokens": 1.25,
+      "cost_per_1m_cached_input_tokens": 0.2,
+      "cost_per_1m_output_tokens": 2.5,
+      "tags": [
+        "fast",
+        "coding",
+        "general",
+        "long-context"
+      ],
+      "description": "Cost-efficient 1M-context Grok tier ($1.25/$2.50) for high-throughput reasoning and summarization."
+    },
+    {
+      "id": "deepseek-v4-pro",
+      "aliases": [
+        "deepseek-pro",
+        "v4-pro"
+      ],
+      "openrouter_id": "deepseek/deepseek-v4-pro",
+      "provider": "DeepSeek",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 1048576,
+      "cost_per_1m_input_tokens": 0.9,
+      "cost_per_1m_cached_input_tokens": 0.2,
+      "cost_per_1m_output_tokens": 1.5,
+      "tags": [
+        "reasoning",
+        "coding",
+        "smart",
+        "cheap",
+        "agentic",
+        "long-context"
+      ],
+      "description": "DeepSeek's 1M-context flagship reasoning & coding model with aggressive cache-hit economics."
+    },
+    {
+      "id": "deepseek-v4.1-flash",
+      "aliases": [
+        "deepseek-flash",
+        "v4.1-flash",
+        "deepseek"
+      ],
+      "openrouter_id": "deepseek/deepseek-v4.1-flash-1017",
+      "provider": "DeepSeek",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 1048576,
+      "cost_per_1m_input_tokens": 0.15,
+      "cost_per_1m_cached_input_tokens": 0.003,
+      "cost_per_1m_output_tokens": 0.6,
+      "batch_discount": 0.5,
+      "tags": [
+        "fast",
+        "cheap",
+        "coding",
+        "reasoning",
+        "agentic",
+        "long-context"
+      ],
+      "description": "Ultra-cheap 1M-context DeepSeek V4.1 Flash ($0.15/$0.60, $0.003 cache hit) for high-volume coding."
+    },
+    {
+      "id": "qwen4-max",
+      "aliases": [
+        "qwen-max",
+        "qwen4"
+      ],
+      "openrouter_id": "qwen/qwen4-max",
+      "provider": "Alibaba Qwen",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 1000000,
+      "cost_per_1m_input_tokens": 1.425,
+      "cost_per_1m_output_tokens": 4.275,
+      "tags": [
+        "reasoning",
+        "coding",
+        "multilingual",
+        "smart",
+        "agentic",
+        "long-context"
+      ],
+      "description": "Alibaba's flagship Qwen 4 Max (1M context) excelling at multilingual, coding, and structured tasks.",
+      "cost_per_1m_cached_input_tokens": 0.0713
+    },
+    {
+      "id": "qwen3.8-flash",
+      "aliases": [
+        "qwen-flash"
+      ],
+      "openrouter_id": "qwen/qwen3.8-flash",
+      "provider": "Alibaba Qwen",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 1000000,
+      "cost_per_1m_input_tokens": 0.15,
+      "cost_per_1m_cached_input_tokens": 0.016,
+      "cost_per_1m_output_tokens": 0.47,
+      "tags": [
+        "fast",
+        "cheap",
+        "multilingual",
+        "coding",
+        "long-context"
+      ],
+      "description": "High-speed, low-cost 1M-context Qwen Flash ($0.15/$0.47) for global production workloads."
+    },
+    {
+      "id": "llama-4-maverick",
+      "aliases": [
+        "llama-maverick",
+        "llama-4"
+      ],
+      "openrouter_id": "meta-llama/llama-4-maverick",
+      "provider": "Meta",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 524288,
+      "cost_per_1m_input_tokens": 0.35,
+      "cost_per_1m_cached_input_tokens": 0.17,
+      "cost_per_1m_output_tokens": 1.0,
+      "tags": [
+        "open-weights",
+        "coding",
+        "multimodal",
+        "vision",
+        "cheap",
+        "fast",
+        "long-context"
+      ],
+      "description": "Meta's flagship MoE Llama 4 Maverick (512K context) offering open-weight flexibility and vision."
+    },
+    {
+      "id": "llama-4-scout",
+      "aliases": [
+        "llama-scout"
+      ],
+      "openrouter_id": "meta-llama/llama-4-scout",
+      "provider": "Meta",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 1310720,
+      "cost_per_1m_input_tokens": 0.1,
+      "cost_per_1m_output_tokens": 0.3,
+      "tags": [
+        "open-weights",
+        "cheap",
+        "fast",
+        "long-context",
+        "general"
+      ],
+      "description": "Ultra-fast open-weight Llama 4 Scout with massive 1.3M context window at $0.10/$0.30 per 1M tokens."
+    },
+    {
+      "id": "mistral-large-4",
+      "aliases": [
+        "mistral-large"
+      ],
+      "openrouter_id": "mistralai/mistral-large-4-0",
+      "provider": "Mistral",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 1048576,
+      "cost_per_1m_input_tokens": 0.7,
+      "cost_per_1m_output_tokens": 2.1,
+      "tags": [
+        "coding",
+        "reasoning",
+        "multilingual",
+        "europe",
+        "long-context"
+      ],
+      "description": "Mistral's 1M-context European flagship model ($0.70/$2.10) for enterprise RAG, coding, and multilingual.",
+      "cost_per_1m_cached_input_tokens": 0.07
+    },
+    {
+      "id": "pixtral-large",
+      "aliases": [
+        "pixtral"
+      ],
+      "openrouter_id": "mistralai/pixtral-large-2502",
+      "provider": "Mistral",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 128000,
+      "cost_per_1m_input_tokens": 2.0,
+      "cost_per_1m_output_tokens": 6.0,
+      "tags": [
+        "vision",
+        "ocr",
+        "multimodal",
+        "document"
+      ],
+      "description": "Mistral's high-accuracy multimodal vision & document OCR specialist."
+    },
+    {
+      "id": "kimi-k3.1-pro",
+      "aliases": [
+        "kimi",
+        "kimi-pro"
+      ],
+      "openrouter_id": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 1048576,
+      "cost_per_1m_input_tokens": 0.253,
+      "cost_per_1m_output_tokens": 8.8,
+      "tags": [
+        "reasoning",
+        "agentic",
+        "coding",
+        "long-context"
+      ],
+      "description": "Moonshot's long-horizon agentic model (1M context) with ultra-low $0.253/1M input cost.",
+      "cost_per_1m_cached_input_tokens": 0.18
+    },
+    {
+      "id": "minimax-m3.1-flash",
+      "aliases": [
+        "minimax",
+        "minimax-flash"
+      ],
+      "openrouter_id": "minimax/minimax-m3.1-flash",
+      "provider": "MiniMax",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 1048576,
+      "cost_per_1m_input_tokens": 0.075,
+      "cost_per_1m_output_tokens": 0.3,
+      "tags": [
+        "cheap",
+        "fast",
+        "long-context",
+        "general"
+      ],
+      "description": "One of the lowest-cost 1M-context models available ($0.075/$0.30 per 1M tokens).",
+      "cost_per_1m_cached_input_tokens": 0.0075
+    },
+    {
+      "id": "sonar-pro",
+      "aliases": [
+        "perplexity-sonar-pro"
+      ],
+      "openrouter_id": "perplexity/sonar-pro",
+      "provider": "Perplexity",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 200000,
+      "cost_per_1m_input_tokens": 3.0,
+      "cost_per_1m_output_tokens": 15.0,
+      "tags": [
+        "search",
+        "grounding",
+        "research",
+        "citations"
+      ],
+      "description": "Web-grounded search & research model with live citations."
+    },
+    {
+      "id": "nova-premier",
+      "aliases": [
+        "amazon-nova-premier"
+      ],
+      "openrouter_id": "amazon/nova-premier-v1",
+      "provider": "Amazon",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 1000000,
+      "cost_per_1m_input_tokens": 2.5,
+      "cost_per_1m_cached_input_tokens": 0.625,
+      "cost_per_1m_output_tokens": 12.5,
+      "tags": [
+        "enterprise",
+        "multimodal",
+        "long-context",
+        "aws"
+      ],
+      "description": "AWS Bedrock flagship multimodal model for enterprise workloads (1M context)."
+    },
+    {
+      "id": "openrouter/gpt-6.2-sol",
+      "aliases": [
+        "or/gpt-6.2-sol"
+      ],
+      "openrouter_id": "openai/gpt-6.2-sol",
       "provider": "OpenRouter",
       "source_type": "aggregator",
       "platform_fee": 0.055,
       "type": "text",
       "billing_unit": "1m_tokens",
-      "context_window": 200000,
-      "cost_per_1m_input_tokens": 3.0,
-      "cost_per_1m_cached_input_tokens": 0.3,
-      "cost_per_1m_output_tokens": 15.0,
+      "context_window": 1050000,
+      "cost_per_1m_input_tokens": 2.0,
+      "cost_per_1m_cached_input_tokens": 0.1,
+      "cost_per_1m_output_tokens": 10.0,
       "tags": [
         "aggregator",
-        "multiple-nodes",
         "unified-api",
         "coding",
-        "reasoning"
+        "multimodal"
       ],
-      "description": "Claude 4.6 Sonnet via OpenRouter aggregator. Base price + 5.5% credit fee."
+      "description": "GPT-6.2 Sol via OpenRouter unified gateway. Base price + 5.5% credit fee."
     },
     {
-      "id": "gemini-3.1-pro",
+      "id": "openrouter/claude-sonnet-5.5",
       "aliases": [
-        "gemini-pro",
-        "gemini-3-pro"
+        "or/claude-sonnet-5.5"
       ],
-      "openrouter_id": "google/gemini-3.1-pro",
-      "provider": "Google",
-      "source_type": "direct",
+      "openrouter_id": "anthropic/claude-sonnet-5.5",
+      "provider": "OpenRouter",
+      "source_type": "aggregator",
+      "platform_fee": 0.055,
       "type": "text",
       "billing_unit": "1m_tokens",
-      "context_window": 2000000,
+      "context_window": 1000000,
       "cost_per_1m_input_tokens": 2.0,
-      "cost_per_1m_cached_input_tokens": 0.5,
-      "cost_per_1m_output_tokens": 12.0,
-      "batch_discount": 0.5,
+      "cost_per_1m_cached_input_tokens": 0.1,
+      "cost_per_1m_output_tokens": 10.0,
       "tags": [
-        "long-context",
-        "reasoning",
-        "multimodal",
-        "video",
-        "audio",
+        "aggregator",
+        "unified-api",
         "coding",
         "agentic"
       ],
-      "description": "Powerful model with massive 2M context window."
+      "description": "Claude Sonnet 5.5 via OpenRouter aggregator. Base price + 5.5% credit fee."
     },
     {
-      "id": "gemini-3.1-flash-lite",
+      "id": "openrouter/gemini-4-carbon",
       "aliases": [
-        "gemini-flash-lite",
-        "flash-lite"
+        "or/gemini-4-carbon"
       ],
-      "openrouter_id": "google/gemini-3.1-flash-lite",
-      "provider": "Google",
-      "source_type": "direct",
+      "openrouter_id": "google/gemini-4-carbon",
+      "provider": "OpenRouter",
+      "source_type": "aggregator",
+      "platform_fee": 0.055,
       "type": "text",
       "billing_unit": "1m_tokens",
-      "context_window": 1000000,
-      "cost_per_1m_input_tokens": 0.25,
-      "cost_per_1m_cached_input_tokens": 0.025,
-      "cost_per_1m_output_tokens": 1.5,
-      "batch_discount": 0.5,
+      "context_window": 1048576,
+      "cost_per_1m_input_tokens": 2.0,
+      "cost_per_1m_cached_input_tokens": 0.1,
+      "cost_per_1m_output_tokens": 10.0,
       "tags": [
-        "fast",
-        "cheap",
+        "aggregator",
+        "unified-api",
         "multimodal",
         "agentic"
       ],
-      "description": "Fastest and most budget-friendly Google model for high-volume workloads."
+      "description": "Gemini 4 Carbon via OpenRouter aggregator. Base price + 5.5% credit fee."
     },
     {
-      "id": "gemini-2.5-flash",
+      "id": "gpt-image-2.6-sunburst",
       "aliases": [
-        "flash-2.5"
+        "gpt-image-2.6",
+        "sunburst"
       ],
-      "openrouter_id": "google/gemini-2.5-flash",
-      "provider": "Google",
+      "provider": "OpenAI",
       "source_type": "direct",
-      "type": "text",
-      "billing_unit": "1m_tokens",
-      "context_window": 1000000,
-      "cost_per_1m_input_tokens": 0.3,
-      "cost_per_1m_cached_input_tokens": 0.03,
-      "cost_per_1m_output_tokens": 2.5,
+      "type": "image",
+      "billing_unit": "image",
+      "cost_per_unit": 0.08,
       "batch_discount": 0.5,
       "tags": [
-        "fast",
-        "cheap",
-        "reasoning",
-        "multimodal",
-        "legacy"
+        "image",
+        "generation",
+        "editing",
+        "premium"
       ],
-      "description": "Previous-gen hybrid reasoning model with 1M context. Being superseded by 3.1 series."
+      "description": "OpenAI's high-detail native multimodal image generator (~$0.08/image standard HD; token-billed under the hood)."
+    },
+    {
+      "id": "gpt-image-2.6-flare",
+      "aliases": [
+        "gpt-image-flare",
+        "flare"
+      ],
+      "provider": "OpenAI",
+      "source_type": "direct",
+      "type": "image",
+      "billing_unit": "image",
+      "cost_per_unit": 0.025,
+      "batch_discount": 0.5,
+      "tags": [
+        "image",
+        "generation",
+        "fast",
+        "cheap"
+      ],
+      "description": "Fast, low-cost OpenAI GPT Image 2.6 Flare variant (~$0.025/image)."
     },
     {
       "id": "imagen-4-fast",
@@ -212,7 +981,7 @@
         "image",
         "generation"
       ],
-      "description": "Standard quality image generation at $0.04/image."
+      "description": "Standard quality Google Imagen 4 generation at $0.04/image."
     },
     {
       "id": "imagen-4-ultra",
@@ -229,10 +998,47 @@
         "generation",
         "premium"
       ],
-      "description": "Highest quality image generation at $0.06/image."
+      "description": "Highest quality Google Imagen 4 Ultra photorealistic generation at $0.06/image."
     },
     {
-      "id": "veo-3",
+      "id": "flux-1.1-pro-ultra",
+      "aliases": [
+        "flux-ultra",
+        "flux-pro-ultra"
+      ],
+      "provider": "Black Forest Labs",
+      "source_type": "direct",
+      "type": "image",
+      "billing_unit": "image",
+      "cost_per_unit": 0.06,
+      "tags": [
+        "image",
+        "generation",
+        "premium",
+        "photorealistic"
+      ],
+      "description": "4MP ultra-high-resolution Flux Pro image generation at $0.06/image."
+    },
+    {
+      "id": "flux-1.1-pro",
+      "aliases": [
+        "flux-pro",
+        "flux"
+      ],
+      "provider": "Black Forest Labs",
+      "source_type": "direct",
+      "type": "image",
+      "billing_unit": "image",
+      "cost_per_unit": 0.04,
+      "tags": [
+        "image",
+        "generation",
+        "fast"
+      ],
+      "description": "Fast commercial Flux 1.1 Pro text-to-image generation at $0.04/image."
+    },
+    {
+      "id": "veo-3.1",
       "aliases": [
         "veo"
       ],
@@ -247,25 +1053,25 @@
         "premium",
         "audio"
       ],
-      "description": "High-fidelity video generation with native audio at $0.40/second."
+      "description": "Google Veo 3.1 1080p/4K video generation with synchronized native audio ($0.40/second)."
     },
     {
-      "id": "veo-3-lite",
+      "id": "veo-3.1-fast",
       "aliases": [
-        "veo-lite"
+        "veo-fast"
       ],
       "provider": "Google",
       "source_type": "direct",
       "type": "video",
       "billing_unit": "second",
-      "cost_per_unit": 0.05,
+      "cost_per_unit": 0.1,
       "tags": [
         "video",
         "generation",
         "fast",
         "cheap"
       ],
-      "description": "Cost-effective 720p video generation at $0.05/second."
+      "description": "Rapid Veo 3.1 Fast 720p/1080p video generation at $0.10/second."
     },
     {
       "id": "lyria-3-pro",
@@ -304,120 +1110,6 @@
         "cheap"
       ],
       "description": "Short musical clips and loops (up to 30 sec) at $0.04/clip."
-    },
-    {
-      "id": "gpt-4o",
-      "aliases": [
-        "4o"
-      ],
-      "openrouter_id": "openai/gpt-4o",
-      "provider": "OpenAI",
-      "source_type": "direct",
-      "type": "text",
-      "billing_unit": "1m_tokens",
-      "context_window": 128000,
-      "cost_per_1m_input_tokens": 2.5,
-      "cost_per_1m_cached_input_tokens": 1.25,
-      "cost_per_1m_output_tokens": 10.0,
-      "batch_discount": 0.5,
-      "tags": [
-        "reasoning",
-        "coding",
-        "vision",
-        "multimodal",
-        "general",
-        "premium",
-        "smart",
-        "legacy"
-      ],
-      "description": "Reliable standard model for complex tasks."
-    },
-    {
-      "id": "gpt-5.5",
-      "aliases": [
-        "gpt5",
-        "gpt-5"
-      ],
-      "openrouter_id": "openai/gpt-5.5",
-      "provider": "OpenAI",
-      "source_type": "direct",
-      "type": "text",
-      "billing_unit": "1m_tokens",
-      "context_window": 12000000,
-      "cost_per_1m_input_tokens": 5.0,
-      "cost_per_1m_cached_input_tokens": 0.5,
-      "cost_per_1m_output_tokens": 30.0,
-      "batch_discount": 0.5,
-      "tags": [
-        "reasoning",
-        "coding",
-        "vision",
-        "multimodal",
-        "smart",
-        "agentic",
-        "premium"
-      ],
-      "description": "Natively omnimodal flagship with 12M context. Optimized for agentic workflows and coding."
-    },
-    {
-      "id": "gpt-5.5-pro",
-      "aliases": [
-        "gpt5-pro",
-        "gpt-5-pro"
-      ],
-      "openrouter_id": "openai/gpt-5.5-pro",
-      "provider": "OpenAI",
-      "source_type": "direct",
-      "type": "text",
-      "billing_unit": "1m_tokens",
-      "context_window": 12000000,
-      "cost_per_1m_input_tokens": 30.0,
-      "cost_per_1m_cached_input_tokens": 15.0,
-      "cost_per_1m_output_tokens": 180.0,
-      "batch_discount": 0.5,
-      "tags": [
-        "reasoning",
-        "premium",
-        "precision",
-        "smart",
-        "enterprise",
-        "agentic"
-      ],
-      "description": "Maximum precision variant for legal, analytics, and high-stakes environments."
-    },
-    {
-      "id": "dall-e-3",
-      "aliases": [
-        "dalle3",
-        "dalle-3"
-      ],
-      "provider": "OpenAI",
-      "source_type": "direct",
-      "type": "image",
-      "billing_unit": "image",
-      "cost_per_unit": 0.04,
-      "tags": [
-        "image",
-        "generation"
-      ],
-      "description": "Standard quality image generation (1024x1024) at $0.04/image. HD at $0.08."
-    },
-    {
-      "id": "gpt-image-1",
-      "aliases": [
-        "gpt-image"
-      ],
-      "provider": "OpenAI",
-      "source_type": "direct",
-      "type": "image",
-      "billing_unit": "image",
-      "cost_per_unit": 0.02,
-      "tags": [
-        "image",
-        "generation",
-        "cheap"
-      ],
-      "description": "Budget image generation starting at $0.02/image (low quality). Premium tiers available."
     },
     {
       "id": "whisper",
@@ -471,30 +1163,6 @@
         "premium"
       ],
       "description": "High-definition text-to-speech at $30/1M characters."
-    },
-    {
-      "id": "openrouter/gpt-4o",
-      "aliases": [
-        "or/gpt-4o"
-      ],
-      "openrouter_id": "openai/gpt-4o",
-      "provider": "OpenRouter",
-      "source_type": "aggregator",
-      "platform_fee": 0.055,
-      "type": "text",
-      "billing_unit": "1m_tokens",
-      "context_window": 128000,
-      "cost_per_1m_input_tokens": 2.5,
-      "cost_per_1m_cached_input_tokens": 1.25,
-      "cost_per_1m_output_tokens": 10.0,
-      "tags": [
-        "aggregator",
-        "unified-api",
-        "coding",
-        "vision",
-        "legacy"
-      ],
-      "description": "GPT-4o via OpenRouter. Base price + 5.5% platform fee."
     },
     {
       "id": "portkey/gateway",
@@ -552,6 +1220,303 @@
       "description": "Dynamic model router. Pricing is custom/enterprise focused."
     },
     {
+      "id": "claude-opus-4.7",
+      "aliases": [
+        "opus-4.7"
+      ],
+      "openrouter_id": "anthropic/claude-opus-4.7",
+      "provider": "Anthropic",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 200000,
+      "cost_per_1m_input_tokens": 5.0,
+      "cost_per_1m_cached_input_tokens": 0.5,
+      "cost_per_1m_output_tokens": 25.0,
+      "batch_discount": 0.5,
+      "tags": [
+        "reasoning",
+        "coding",
+        "vision",
+        "multimodal",
+        "agentic",
+        "legacy"
+      ],
+      "description": "Previous-gen Claude 4.7 Opus flagship (superseded by Claude Opus 5.5)."
+    },
+    {
+      "id": "claude-opus-4.6",
+      "aliases": [
+        "opus-4.6"
+      ],
+      "openrouter_id": "anthropic/claude-opus-4.6",
+      "provider": "Anthropic",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 200000,
+      "cost_per_1m_input_tokens": 5.0,
+      "cost_per_1m_cached_input_tokens": 0.5,
+      "cost_per_1m_output_tokens": 25.0,
+      "batch_discount": 0.5,
+      "tags": [
+        "reasoning",
+        "coding",
+        "vision",
+        "legacy"
+      ],
+      "description": "Legacy Claude 4.6 Opus model."
+    },
+    {
+      "id": "claude-sonnet-4.6",
+      "aliases": [
+        "sonnet-4.6"
+      ],
+      "openrouter_id": "anthropic/claude-sonnet-4.6",
+      "provider": "Anthropic",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 200000,
+      "cost_per_1m_input_tokens": 3.0,
+      "cost_per_1m_cached_input_tokens": 0.3,
+      "cost_per_1m_output_tokens": 15.0,
+      "batch_discount": 0.5,
+      "tags": [
+        "coding",
+        "reasoning",
+        "fast",
+        "vision",
+        "legacy"
+      ],
+      "description": "Previous-gen Claude 4.6 Sonnet (superseded by Claude Sonnet 5.5 at $2/$10)."
+    },
+    {
+      "id": "openrouter/claude-sonnet-4.6",
+      "aliases": [
+        "or/claude-sonnet-4.6"
+      ],
+      "openrouter_id": "anthropic/claude-sonnet-4.6",
+      "provider": "OpenRouter",
+      "source_type": "aggregator",
+      "platform_fee": 0.055,
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 200000,
+      "cost_per_1m_input_tokens": 3.0,
+      "cost_per_1m_cached_input_tokens": 0.3,
+      "cost_per_1m_output_tokens": 15.0,
+      "tags": [
+        "aggregator",
+        "unified-api",
+        "legacy"
+      ],
+      "description": "Legacy Claude 4.6 Sonnet via OpenRouter (+5.5% fee)."
+    },
+    {
+      "id": "gpt-5.5",
+      "aliases": [
+        "gpt5"
+      ],
+      "openrouter_id": "openai/gpt-5.5",
+      "provider": "OpenAI",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 12000000,
+      "cost_per_1m_input_tokens": 5.0,
+      "cost_per_1m_cached_input_tokens": 0.5,
+      "cost_per_1m_output_tokens": 30.0,
+      "batch_discount": 0.5,
+      "tags": [
+        "reasoning",
+        "coding",
+        "multimodal",
+        "legacy"
+      ],
+      "description": "Previous-gen GPT-5.5 flagship (superseded by GPT-6.2 series)."
+    },
+    {
+      "id": "gpt-5.5-pro",
+      "aliases": [
+        "gpt5-pro"
+      ],
+      "openrouter_id": "openai/gpt-5.5-pro",
+      "provider": "OpenAI",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 12000000,
+      "cost_per_1m_input_tokens": 30.0,
+      "cost_per_1m_cached_input_tokens": 15.0,
+      "cost_per_1m_output_tokens": 180.0,
+      "batch_discount": 0.5,
+      "tags": [
+        "reasoning",
+        "precision",
+        "enterprise",
+        "legacy"
+      ],
+      "description": "Previous-gen GPT-5.5 Pro high-precision tier."
+    },
+    {
+      "id": "gpt-4o",
+      "aliases": [
+        "4o"
+      ],
+      "openrouter_id": "openai/gpt-4o",
+      "provider": "OpenAI",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 128000,
+      "cost_per_1m_input_tokens": 2.5,
+      "cost_per_1m_cached_input_tokens": 1.25,
+      "cost_per_1m_output_tokens": 10.0,
+      "batch_discount": 0.5,
+      "tags": [
+        "reasoning",
+        "coding",
+        "vision",
+        "legacy"
+      ],
+      "description": "Legacy GPT-4o multimodal model."
+    },
+    {
+      "id": "openrouter/gpt-4o",
+      "aliases": [
+        "or/gpt-4o"
+      ],
+      "openrouter_id": "openai/gpt-4o",
+      "provider": "OpenRouter",
+      "source_type": "aggregator",
+      "platform_fee": 0.055,
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 128000,
+      "cost_per_1m_input_tokens": 2.5,
+      "cost_per_1m_cached_input_tokens": 1.25,
+      "cost_per_1m_output_tokens": 10.0,
+      "tags": [
+        "aggregator",
+        "unified-api",
+        "legacy"
+      ],
+      "description": "Legacy GPT-4o via OpenRouter. Base price + 5.5% platform fee."
+    },
+    {
+      "id": "gemini-3.1-pro",
+      "aliases": [
+        "gemini-3-pro"
+      ],
+      "openrouter_id": "google/gemini-3.1-pro",
+      "provider": "Google",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 2000000,
+      "cost_per_1m_input_tokens": 2.0,
+      "cost_per_1m_cached_input_tokens": 0.5,
+      "cost_per_1m_output_tokens": 12.0,
+      "batch_discount": 0.5,
+      "tags": [
+        "long-context",
+        "reasoning",
+        "multimodal",
+        "legacy"
+      ],
+      "description": "Previous-gen Gemini 3.1 Pro (superseded by Gemini 4 series)."
+    },
+    {
+      "id": "gemini-3.1-flash-lite",
+      "aliases": [
+        "flash-lite"
+      ],
+      "openrouter_id": "google/gemini-3.1-flash-lite",
+      "provider": "Google",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 1000000,
+      "cost_per_1m_input_tokens": 0.25,
+      "cost_per_1m_cached_input_tokens": 0.025,
+      "cost_per_1m_output_tokens": 1.5,
+      "batch_discount": 0.5,
+      "tags": [
+        "fast",
+        "cheap",
+        "multimodal",
+        "legacy"
+      ],
+      "description": "Budget Gemini 3.1 Flash-Lite model for high-volume workloads."
+    },
+    {
+      "id": "gemini-2.5-flash",
+      "aliases": [
+        "flash-2.5"
+      ],
+      "openrouter_id": "google/gemini-2.5-flash",
+      "provider": "Google",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 1000000,
+      "cost_per_1m_input_tokens": 0.3,
+      "cost_per_1m_cached_input_tokens": 0.03,
+      "cost_per_1m_output_tokens": 2.5,
+      "batch_discount": 0.5,
+      "tags": [
+        "fast",
+        "cheap",
+        "legacy"
+      ],
+      "description": "Legacy Gemini 2.5 Flash model."
+    },
+    {
+      "id": "deepseek-r1",
+      "aliases": [
+        "r1"
+      ],
+      "openrouter_id": "deepseek/deepseek-r1-0528",
+      "provider": "DeepSeek",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 163840,
+      "cost_per_1m_input_tokens": 0.571,
+      "cost_per_1m_cached_input_tokens": 0.14,
+      "cost_per_1m_output_tokens": 2.286,
+      "tags": [
+        "reasoning",
+        "coding",
+        "cheap",
+        "legacy"
+      ],
+      "description": "Previous-gen DeepSeek R1 reasoning model (superseded by DeepSeek V4 Pro)."
+    },
+    {
+      "id": "deepseek-v3",
+      "aliases": [
+        "v3"
+      ],
+      "openrouter_id": "deepseek/deepseek-chat",
+      "provider": "DeepSeek",
+      "source_type": "direct",
+      "type": "text",
+      "billing_unit": "1m_tokens",
+      "context_window": 163840,
+      "cost_per_1m_input_tokens": 0.2574,
+      "cost_per_1m_cached_input_tokens": 0.014,
+      "cost_per_1m_output_tokens": 1.0287,
+      "tags": [
+        "general",
+        "coding",
+        "cheap",
+        "legacy"
+      ],
+      "description": "Previous-gen DeepSeek V3 chat model (superseded by DeepSeek V4.1 Flash)."
+    },
+    {
       "id": "deepseek-coder-v2",
       "aliases": [
         "coder-v2"
@@ -568,55 +1533,76 @@
       "tags": [
         "coding",
         "cheap",
-        "reasoning",
         "legacy"
       ],
-      "description": "Extremely cost-effective model optimized for coding."
+      "description": "Legacy DeepSeek Coder V2 model."
     },
     {
-      "id": "deepseek-v3",
+      "id": "dall-e-3",
       "aliases": [
-        "v3",
-        "deepseek-chat"
+        "dalle3"
       ],
-      "openrouter_id": "deepseek/deepseek-chat",
-      "provider": "DeepSeek",
+      "provider": "OpenAI",
       "source_type": "direct",
-      "type": "text",
-      "billing_unit": "1m_tokens",
-      "context_window": 128000,
-      "cost_per_1m_input_tokens": 0.2574,
-      "cost_per_1m_cached_input_tokens": 0.014,
-      "cost_per_1m_output_tokens": 1.0287,
+      "type": "image",
+      "billing_unit": "image",
+      "cost_per_unit": 0.04,
       "tags": [
-        "general",
-        "coding",
-        "cheap"
+        "image",
+        "generation",
+        "legacy"
       ],
-      "description": "Latest general-purpose DeepSeek model. Same pricing as V2, improved performance."
+      "description": "Legacy DALL-E 3 image generation (superseded by GPT-Image 2.6)."
     },
     {
-      "id": "deepseek-r1",
+      "id": "gpt-image-1",
       "aliases": [
-        "r1",
-        "deepseek-reasoner"
+        "gpt-image"
       ],
-      "openrouter_id": "deepseek/deepseek-r1",
-      "provider": "DeepSeek",
+      "provider": "OpenAI",
       "source_type": "direct",
-      "type": "text",
-      "billing_unit": "1m_tokens",
-      "context_window": 128000,
-      "cost_per_1m_input_tokens": 0.55,
-      "cost_per_1m_cached_input_tokens": 0.14,
-      "cost_per_1m_output_tokens": 2.19,
+      "type": "image",
+      "billing_unit": "image",
+      "cost_per_unit": 0.02,
       "tags": [
-        "reasoning",
-        "coding",
+        "image",
+        "generation",
         "cheap",
-        "smart"
+        "legacy"
       ],
-      "description": "Advanced reasoning model. Excellent cost-to-performance for complex tasks."
+      "description": "Previous-gen GPT-Image-1 model (superseded by GPT-Image 2.6 Flare)."
+    },
+    {
+      "id": "veo-3",
+      "provider": "Google",
+      "source_type": "direct",
+      "type": "video",
+      "billing_unit": "second",
+      "cost_per_unit": 0.4,
+      "tags": [
+        "video",
+        "generation",
+        "legacy"
+      ],
+      "description": "Previous-gen Veo 3 video generation (superseded by Veo 3.1)."
+    },
+    {
+      "id": "veo-3-lite",
+      "aliases": [
+        "veo-lite"
+      ],
+      "provider": "Google",
+      "source_type": "direct",
+      "type": "video",
+      "billing_unit": "second",
+      "cost_per_unit": 0.05,
+      "tags": [
+        "video",
+        "generation",
+        "cheap",
+        "legacy"
+      ],
+      "description": "Budget 720p Veo 3 Lite video generation at $0.05/second."
     }
   ]
 }

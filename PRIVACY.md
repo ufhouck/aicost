@@ -28,7 +28,8 @@ Both the Python CLI and the Node.js MCP server make **two types** of outbound HT
 |---------|-----|-----------|---------|
 | Currency Rates (Primary) | `cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/` | None | Fetching 200+ exchange rates |
 | Currency Rates (Fallback) | `latest.currency-api.pages.dev` / `api.frankfurter.app` | None | Automatic mirror fallback if primary CDN is unreachable |
-| Pricing Sync | `raw.githubusercontent.com/ufhouck/aicost/main/data/pricing.json` | None | Fetching latest AI model pricing |
+| Pricing Sync | `raw.githubusercontent.com/ufhouck/aicost/main/data/pricing.json` | None | Fetching latest curated AI model pricing |
+| Live Catalog Fallback | `openrouter.ai/api/v1/models` | None | Public catalog lookup for 470+ live models |
 
 **No cookies, tokens, user identifiers, or personal data** are included in these requests.
 

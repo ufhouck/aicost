@@ -168,7 +168,8 @@ def test_cli_json_commands() -> None:
 def test_mcp_tools_and_resources() -> None:
     out_list, err_list = execute_mcp_tool("list_ai_models", {"provider": "DeepSeek", "include_legacy": False})
     assert not err_list
-    assert "deepseek-r1" in out_list
+    assert "deepseek-v4-pro" in out_list
+    assert "deepseek-v4.1-flash" in out_list
 
     out_calc, err_calc = execute_mcp_tool(
         "calculate_ai_cost",
@@ -179,12 +180,30 @@ def test_mcp_tools_and_resources() -> None:
 
     out_cmp, err_cmp = execute_mcp_tool(
         "compare_ai_models",
-        {"model_ids": ["claude-opus-4.7", "gpt-5.5", "gemini-3.1-pro"]},
+        {"model_ids": ["gpt-6.2-astra", "claude-opus-5.5", "gemini-4-neon", "grok-4.7"]},
     )
     assert not err_cmp
-    assert len(json.loads(out_cmp)["comparison"]) == 3
+    assert len(json.loads(out_cmp)["comparison"]) == 4
 
     mime, res_text = read_mcp_resource("aicost://pricing/metadata")
     assert mime == "application/json"
     assert json.loads(res_text)["model_count"] == len(get_pricing_data())
     assert get_all_data()["models"]
+
+
+def test_frontier_2026_models_and_dynamic_openrouter_synthesis() -> None:
+    astra = get_model_by_id("gpt-6.2-astra", allow_live=False)
+    or_astra = get_model_by_id("openrouter/gpt-6.2-astra", allow_live=False)
+    opus55 = get_model_by_id("claude-opus-5.5", allow_live=False)
+    gemini4 = get_model_by_id("gemini-4-carbon", allow_live=False)
+    grok47 = get_model_by_id("grok-4.7", allow_live=False)
+
+    assert astra is not None and astra["cost_per_1m_input_tokens"] == pytest.approx(8.0)
+    assert or_astra is not None and or_astra["platform_fee"] == pytest.approx(0.055)
+    assert opus55 is not None and opus55["context_window"] == 1_000_000
+    assert gemini4 is not None and gemini4["cost_per_1m_cached_input_tokens"] == pytest.approx(0.10)
+    assert grok47 is not None and grok47["provider"] == "xAI"
+
+    bd_direct = calculate_cost_breakdown(astra, input_tokens=1_000_000, output_tokens=0)
+    bd_or = calculate_cost_breakdown(or_astra, input_tokens=1_000_000, output_tokens=0)
+    assert bd_or["total_usd"] == pytest.approx(bd_direct["total_usd"] * 1.055)

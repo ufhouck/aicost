@@ -14,15 +14,17 @@ import {
 } from "./calculator.js";
 import { getCurrencyDate, getExchangeRate, refreshRates } from "./currency.js";
 import {
+  fetchLiveCatalog,
   fetchRemotePricing,
   getAllPricingData,
+  getLiveCatalog,
   getPricingMetadata,
   getPricingModels,
 } from "./data.js";
+import type { ModelEntry } from "./types.js";
 
-const SERVER_VERSION = "1.2.0";
+const SERVER_VERSION = "1.3.0";
 
-// Handle basic CLI flags cleanly when a user inspects the binary in terminal
 const cliArgs = process.argv.slice(2);
 if (cliArgs.includes("--version") || cliArgs.includes("-v")) {
   process.stdout.write(`aicost-mcp v${SERVER_VERSION}\n`);
@@ -41,6 +43,27 @@ function roundNum(val: number | null, decimals = 6): number | null {
   if (val === null) return null;
   const factor = 10 ** decimals;
   return Math.round(val * factor) / factor;
+}
+
+async function resolveModelWithLiveFallback(modelId: string): Promise<{
+  model?: ModelEntry;
+  suggestions: string[];
+}> {
+  const curated = await getPricingModels(false);
+  const directHit = findModelById(curated, modelId);
+  if (directHit) {
+    return { model: directHit, suggestions: [] };
+  }
+
+  const liveModels = await getLiveCatalog(true);
+  const liveHit = findModelById(curated, modelId, liveModels);
+  if (liveHit) {
+    return { model: liveHit, suggestions: [] };
+  }
+
+  return {
+    suggestions: suggestSimilarModels([...curated, ...liveModels], modelId),
+  };
 }
 
 const server = new McpServer({
@@ -79,7 +102,7 @@ server.registerResource(
   {
     title: "Pricing & Currency Metadata",
     description:
-      "Current pricing database version, last update date, and currency rate cache timestamp.",
+      "Current pricing database version, last update date, live catalog count, and currency rate cache timestamp.",
     mimeType: "application/json",
   },
   async (uri) => {
@@ -109,13 +132,13 @@ server.registerTool(
   "list_ai_models",
   {
     description:
-      "List AI models and their effective pricing across text, image, video, audio, and gateway providers. Supports filtering by provider, type, capability tag, and currency conversion.",
+      "List AI models and their effective pricing across text, image, video, audio, and gateway providers. Supports curated flagship models plus optional 400+ live OpenRouter catalog.",
     inputSchema: {
       provider: z
         .string()
         .optional()
         .describe(
-          "Filter by provider name (e.g., 'OpenAI', 'Anthropic', 'Google', 'DeepSeek', 'OpenRouter')"
+          "Filter by provider name (e.g., 'OpenAI', 'Anthropic', 'Google', 'xAI', 'DeepSeek', 'Meta', 'Mistral', 'OpenRouter')"
         ),
       model_type: z
         .enum(["text", "image", "video", "audio", "gateway"])
@@ -125,26 +148,30 @@ server.registerTool(
         .string()
         .optional()
         .describe(
-          "Filter by capability tag (e.g., 'coding', 'cheap', 'fast', 'agentic', 'vision', 'reasoning')"
+          "Filter by capability tag (e.g., 'coding', 'cheap', 'fast', 'agentic', 'vision', 'reasoning', 'long-context')"
         ),
       include_legacy: z
         .boolean()
         .optional()
-        .describe("Include older/superseded models tagged as legacy (default: true)"),
+        .describe("Include older/superseded models tagged as legacy (default: false)"),
+      include_live: z
+        .boolean()
+        .optional()
+        .describe("Include 400+ live models from OpenRouter catalog (default: false)"),
       currency: z
         .string()
         .optional()
         .describe("Target currency code (e.g., 'USD', 'TRY', 'EUR', 'GBP'). Defaults to 'USD'."),
     },
   },
-  async ({ provider, model_type, tag, include_legacy, currency }) => {
+  async ({ provider, model_type, tag, include_legacy, include_live, currency }) => {
     try {
-      const allModels = await getPricingModels();
+      const allModels = await getPricingModels(include_live ?? false);
       const filtered = filterModels(allModels, {
         provider,
         modelType: model_type,
         tag,
-        includeLegacy: include_legacy ?? true,
+        includeLegacy: include_legacy ?? false,
       });
       const { rate, currency: curr } = await getExchangeRate(currency);
       const meta = await getPricingMetadata();
@@ -184,12 +211,11 @@ server.registerTool(
   }
 );
 
-// Shared handler for calculate_ai_cost & legacy alias get_ai_cost
 const costInputSchema = {
   model_id: z
     .string()
     .describe(
-      "Model ID or alias (e.g., 'claude-opus-4.7', 'gpt-5.5', 'gemini-3.1-pro', 'openrouter/gpt-4o', 'veo-3')"
+      "Model ID or alias (e.g., 'gpt-6.2-astra', 'claude-opus-5.5', 'gemini-4-carbon', 'grok-4.7', 'deepseek-v4.1-flash', 'veo-3.1')"
     ),
   input_tokens: z.number().int().optional().describe("Uncached input tokens (for text models)"),
   cached_input_tokens: z
@@ -225,10 +251,8 @@ async function handleCalculateCost(args: {
   currency?: string;
 }) {
   try {
-    const models = await getPricingModels();
-    const found = findModelById(models, args.model_id);
+    const { model: found, suggestions } = await resolveModelWithLiveFallback(args.model_id);
     if (!found) {
-      const suggestions = suggestSimilarModels(models, args.model_id);
       const hint = suggestions.length > 0 ? ` Did you mean: ${suggestions.join(", ")}?` : "";
       return {
         content: [{ type: "text" as const, text: `Error: Model '${args.model_id}' not found.${hint}` }],
@@ -275,7 +299,7 @@ server.registerTool(
   "calculate_ai_cost",
   {
     description:
-      "Calculate the exact cost of an AI API call with full base cost, prompt-caching, batch discount, and aggregator platform fee breakdown.",
+      "Calculate the exact cost of an AI API call with full base cost, prompt-caching, batch discount, and aggregator platform fee breakdown. Supports 60+ curated models and 400+ live OpenRouter models.",
     inputSchema: costInputSchema,
   },
   handleCalculateCost
@@ -303,7 +327,7 @@ server.registerTool(
         .array(z.string())
         .optional()
         .describe(
-          "List of two or more model IDs to compare (e.g., ['claude-opus-4.7', 'gpt-5.5', 'gemini-3.1-pro'])"
+          "List of two or more model IDs to compare (e.g., ['gpt-6.2-astra', 'claude-opus-5.5', 'gemini-4-neon'])"
         ),
       model_id_1: z.string().optional().describe("First model ID (legacy 2-model parameter)"),
       model_id_2: z.string().optional().describe("Second model ID (legacy 2-model parameter)"),
@@ -343,12 +367,10 @@ server.registerTool(
         };
       }
 
-      const allModels = await getPricingModels();
-      const resolved = [];
+      const resolved: ModelEntry[] = [];
       for (const mid of ids) {
-        const found = findModelById(allModels, mid);
+        const { model: found, suggestions } = await resolveModelWithLiveFallback(mid);
         if (!found) {
-          const suggestions = suggestSimilarModels(allModels, mid);
           const hint = suggestions.length > 0 ? ` Did you mean: ${suggestions.join(", ")}?` : "";
           return {
             content: [{ type: "text", text: `Error: Model '${mid}' not found.${hint}` }],
@@ -433,7 +455,7 @@ server.registerTool(
   },
   async ({ task_description, limit, model_type, max_input_cost, include_legacy, currency }) => {
     try {
-      const allModels = await getPricingModels();
+      const allModels = await getPricingModels(false);
       const recs = recommendModels(allModels, {
         taskDescription: task_description,
         limit: limit ?? 3,
@@ -495,7 +517,7 @@ server.registerTool(
     description:
       "Estimate daily, monthly, and annual AI API costs for a recurring production workload.",
     inputSchema: {
-      model_id: z.string().describe("Model ID or alias"),
+      model_id: z.string().describe("Model ID or alias (e.g., 'gpt-6.2-sol', 'claude-sonnet-5.5')"),
       requests_per_day: z.number().describe("Average requests per day"),
       avg_input_tokens: z
         .number()
@@ -533,10 +555,8 @@ server.registerTool(
     currency,
   }) => {
     try {
-      const allModels = await getPricingModels();
-      const found = findModelById(allModels, model_id);
+      const { model: found, suggestions } = await resolveModelWithLiveFallback(model_id);
       if (!found) {
-        const suggestions = suggestSimilarModels(allModels, model_id);
         const hint = suggestions.length > 0 ? ` Did you mean: ${suggestions.join(", ")}?` : "";
         return {
           content: [{ type: "text", text: `Error: Model '${model_id}' not found.${hint}` }],
@@ -597,7 +617,7 @@ server.registerTool(
   "get_pricing_metadata",
   {
     description:
-      "Get metadata about the current pricing database (schema version, model count, last update date, currency cache timestamp).",
+      "Get metadata about the current pricing database (schema version, model count, live catalog count, last update date, currency cache timestamp).",
     inputSchema: {},
   },
   async () => {
@@ -626,22 +646,27 @@ server.registerTool(
   "sync_pricing_data",
   {
     description:
-      "Fetch the latest pricing database from GitHub and refresh live currency exchange rates.",
+      "Fetch the latest curated pricing database, refresh 400+ live OpenRouter models, and update currency exchange rates.",
     inputSchema: {},
   },
   async () => {
-    const remote = await fetchRemotePricing();
-    const rates = await refreshRates();
+    const [remote, liveModels, rates] = await Promise.all([
+      fetchRemotePricing(),
+      fetchLiveCatalog(),
+      refreshRates(),
+    ]);
     const fallbackMeta = await getPricingMetadata();
-    const synced = Boolean(remote);
+    const synced = Boolean(remote) || liveModels.length > 0;
     return {
       content: [
         {
           type: "text",
           text: JSON.stringify(
             {
-              pricing_synced: synced,
+              pricing_synced: Boolean(remote),
               last_updated: remote?.last_updated ?? fallbackMeta.last_updated,
+              live_catalog_synced: liveModels.length > 0,
+              live_catalog_count: liveModels.length,
               currencies_synced: Object.keys(rates).length > 1,
               currency_count: Object.keys(rates).length,
             },

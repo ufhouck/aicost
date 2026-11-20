@@ -11,6 +11,7 @@ from aicost import __version__
 from aicost.calculator import (
     calculate_cost_breakdown,
     estimate_monthly_cost,
+    fetch_live_catalog,
     fetch_remote_pricing,
     filter_models,
     format_unit_label,
@@ -48,7 +49,11 @@ TOOL_DEFINITIONS: list[dict[str, Any]] = [
                 },
                 "include_legacy": {
                     "type": "boolean",
-                    "description": "Include older/superseded models tagged as legacy (default: true)",
+                    "description": "Include older/superseded models tagged as legacy (default: false)",
+                },
+                "include_live": {
+                    "type": "boolean",
+                    "description": "Include 400+ live models from OpenRouter catalog in addition to curated models (default: false)",
                 },
                 "currency": {
                     "type": "string",
@@ -61,14 +66,14 @@ TOOL_DEFINITIONS: list[dict[str, Any]] = [
         "name": "calculate_ai_cost",
         "description": (
             "Calculate the exact cost of an AI API call with full base cost, prompt-caching, batch discount, "
-            "and aggregator platform fee breakdown."
+            "and aggregator platform fee breakdown. Supports 60+ curated models and 400+ live OpenRouter models."
         ),
         "inputSchema": {
             "type": "object",
             "properties": {
                 "model_id": {
                     "type": "string",
-                    "description": "Model ID or alias (e.g., 'claude-opus-4.7', 'gpt-5.5', 'gemini-3.1-pro', 'openrouter/gpt-4o', 'veo-3')",
+                    "description": "Model ID or alias (e.g., 'gpt-6.2-astra', 'claude-opus-5.5', 'gemini-4-carbon', 'grok-4.7', 'deepseek-v4.1-flash', 'veo-3.1')",
                 },
                 "input_tokens": {"type": "integer", "description": "Uncached input tokens (for text models)"},
                 "cached_input_tokens": {"type": "integer", "description": "Cached input tokens billed at cache-read rate"},
@@ -214,7 +219,8 @@ def execute_mcp_tool(name: str, arguments: dict[str, Any] | None) -> tuple[str, 
             provider=args.get("provider"),
             model_type=args.get("model_type"),
             tag=args.get("tag"),
-            include_legacy=args.get("include_legacy", True),
+            include_legacy=bool(args.get("include_legacy", False)),
+            include_live=bool(args.get("include_live", False)),
             sort_by="input",
         )
         rate, curr = get_exchange_rate(args.get("currency", "USD"))
@@ -425,13 +431,16 @@ def execute_mcp_tool(name: str, arguments: dict[str, Any] | None) -> tuple[str, 
 
     if name == "sync_pricing_data":
         data = fetch_remote_pricing()
+        live_models = fetch_live_catalog()
         rates = refresh_rates()
         return json.dumps({
             "pricing_synced": bool(data),
             "last_updated": data.get("last_updated") if data else get_pricing_metadata().get("last_updated"),
+            "live_catalog_synced": len(live_models) > 0,
+            "live_catalog_count": len(live_models),
             "currencies_synced": len(rates) > 1,
             "currency_count": len(rates),
-        }, indent=2), not bool(data)
+        }, indent=2), not bool(data or live_models)
 
     return f"Unsupported tool: {name}", True
 

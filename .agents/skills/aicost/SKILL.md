@@ -12,7 +12,7 @@ Use the `aicost` CLI tool to look up current AI model pricing, factor in prompt 
 
 ## When to use
 
-- When the user asks about the price, cost, or pricing of an AI API (like GPT-5.5, Claude Opus 4.7, Gemini 3.1, DeepSeek R1).
+- When the user asks about the price, cost, or pricing of an AI API (like GPT-6.2 Astra/Sol, Claude Opus/Sonnet/Haiku 5.5, Gemini 4 Neon/Carbon, Grok 4.7, DeepSeek V4, Llama 4, Qwen 4).
 - When the user wants to compare two or more models side-by-side (including Direct vs. OpenRouter fees).
 - When the user wants to project daily, monthly, or annual API spend for a recurring workload.
 - When the user wants to know the "cheapest" or "best" AI model for a specific task.

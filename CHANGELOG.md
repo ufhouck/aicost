@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2026-11-20
+
+### Added
+- **Major Frontier Model Catalog Upgrade (60+ Curated Models):**
+  - **OpenAI:** `gpt-6.2-astra`, `gpt-6.2-sol`, `gpt-6.1-terra`, `gpt-6-luna`, `o3`, `o3-pro`, `gpt-image-2.6-sunburst`, `gpt-image-2.6-flare`
+  - **Anthropic:** `claude-fable-5.2`, `claude-opus-5.5`, `claude-sonnet-5.5`, `claude-haiku-5.5` (all 1M context)
+  - **Google:** `gemini-4-neon`, `gemini-4-carbon`, `gemini-4-argon`, `gemini-4-hydrogen`, `gemini-3.8-flash`, `gemini-omni-1.2-flash`, `veo-3.1`, `veo-3.1-fast`
+  - **xAI:** `grok-4.7`, `grok-4.3`
+  - **DeepSeek:** `deepseek-v4-pro`, `deepseek-v4.1-flash`
+  - **Open-Weights & Global Flagships:** `qwen4-max`, `qwen3.8-flash`, `llama-4-maverick`, `llama-4-scout`, `mistral-large-4`, `pixtral-large`, `kimi-k3.1-pro`, `minimax-m3.1-flash`, `sonar-pro`, `nova-premier`, `flux-1.1-pro-ultra`, `flux-1.1-pro`
+- **470+ Live Model Catalog Fallback (`--live` / `include_live`):** Seamless on-demand lookup and caching (`~/.aicost/live_catalog_cache.json`) across OpenRouter's full 470+ model catalog so brand-new or niche models never fail with "Model not found"
+- **Dynamic `openrouter/<model>` Aggregator Synthesis:** Prefix any direct model with `openrouter/` (e.g., `openrouter/gpt-6.2-astra`) to compare Direct vs. OpenRouter (+5.5% fee) on the fly
+- **Weekly Automated New-Model Discovery:** Upgraded `scripts/automate_pricing.py` to automatically discover and add newly released flagship models from 12 watched providers every Sunday
+
+### Changed
+- Reclassified superseded early-2026 models (`gpt-5.5`, `claude-opus-4.7`, `claude-sonnet-4.6`, `gemini-3.1-pro`, `deepseek-r1`, `deepseek-v3`, `dall-e-3`, `veo-3`) as `legacy` and hid legacy models by default in `aicost list` (pass `--include-legacy` to view)
+
 ## [1.2.0] - 2026-11-20
 
 ### Added
