@@ -1,0 +1,66 @@
+{
+  "name": "aicost-mcp",
+  "version": "1.2.0",
+  "mcpName": "io.github.ufhouck/aicost-cli",
+  "description": "AI API Cost Calculator, Model Recommender & Budget Estimator MCP Server. Compare OpenAI, Anthropic, Google, DeepSeek & OpenRouter pricing across 200+ currencies.",
+  "license": "MIT",
+  "author": {
+    "name": "Ufuk Aydin",
+    "email": "info@ufukaydin.com",
+    "url": "https://ufukaydin.com"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "bin": {
+    "aicost-mcp": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "data",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "copy-data": "node scripts/copy-data.mjs",
+    "build": "npm run copy-data && tsc && node scripts/chmod-bin.mjs",
+    "prepack": "npm run build",
+    "typecheck": "tsc --noEmit",
+    "start": "node dist/index.js"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "ai",
+    "llm",
+    "pricing",
+    "cost-calculator",
+    "openai",
+    "anthropic",
+    "gemini",
+    "deepseek",
+    "openrouter",
+    "claude",
+    "cursor"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ufhouck/aicost.git",
+    "directory": "npm"
+  },
+  "homepage": "https://github.com/ufhouck/aicost#readme",
+  "bugs": {
+    "url": "https://github.com/ufhouck/aicost/issues"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0"
+  }
+}

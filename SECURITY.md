@@ -8,7 +8,7 @@
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability within AI-Cost-CLI, please report it responsibly.
+If you discover a security vulnerability within AI-Cost-CLI or `aicost-mcp`, please report it responsibly.
 
 ### How to Report
 
@@ -25,11 +25,12 @@ If you discover a security vulnerability within AI-Cost-CLI, please report it re
 
 ## Security Considerations
 
-AI-Cost-CLI makes the following external network requests:
+AI-Cost-CLI (`aicost-cli`) and the npm MCP server (`aicost-mcp`) make the following external network requests over HTTPS:
 
 | Request | Destination | Purpose |
 |---------|-------------|---------|
-| Currency rates | `cdn.jsdelivr.net` (Fawaz Ahmed API) | Real-time currency conversion |
+| Currency rates (Primary) | `cdn.jsdelivr.net` (`@fawazahmed0/currency-api`) | Real-time currency conversion (200+ currencies) |
+| Currency rates (Fallback) | `latest.currency-api.pages.dev` / `api.frankfurter.app` | Resilient exchange rate fallback |
 | Pricing sync | `raw.githubusercontent.com` | Fetching latest model pricing |
 
 - **No authentication tokens or API keys** are transmitted.
@@ -38,8 +39,14 @@ AI-Cost-CLI makes the following external network requests:
 
 ## Dependencies
 
-We keep dependencies minimal:
+We keep dependencies minimal across both ecosystems:
+
+**Python (`aicost-cli`):**
 - `typer` — CLI framework
 - `rich` — Terminal formatting
 - `requests` — HTTP client
-- `mcp` (optional) — Model Context Protocol server
+- `mcp` — Model Context Protocol server
+
+**Node.js (`aicost-mcp`):**
+- `@modelcontextprotocol/sdk` — Official MCP server SDK
+- `zod` — Schema validation

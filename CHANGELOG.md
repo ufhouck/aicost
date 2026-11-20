@@ -5,6 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-11-20
+
+### Added
+- **Official npm MCP Package (`aicost-mcp`)** — Zero-install TypeScript MCP server (`npx -y aicost-mcp`) sharing `~/.aicost/` cache and full feature parity with Python
+- **`aicost estimate` command** — Daily, monthly, and annual API budget projections for recurring production workloads
+- **Prompt Caching & Batch API Support** — Added `cost_per_1m_cached_input_tokens` (`--cached-input`) and `batch_discount` (`--batch`) calculations
+- **Schema v2.0 Metadata** — Added explicit `billing_unit`, `context_window`, `aliases`, and `openrouter_id` fields across all 29 models
+- **JSON Output Mode (`--json`)** — Structured JSON output across `list`, `calc`, `compare`, `recommend`, `estimate`, and `sync`
+- **Rich Filtering & Sorting** — `aicost list` now supports `--provider`, `--type`, `--tag`, `--sort`, and `--hide-legacy`
+- **Multi-Model Comparison** — `aicost compare` and MCP `compare_ai_models` now compare 2 or more models side-by-side
+- **Smart Model Aliases & Fuzzy Suggestions** — Shorthand aliases (`opus-4.7`, `r1`, `flash-lite`, etc.) and "Did you mean?" suggestions
+- **Expanded MCP Tooling & Resources** — Added `list_ai_models`, `calculate_ai_cost`, `estimate_monthly_cost`, `sync_pricing_data`, and `aicost://pricing/*` resources
+- **`aicost --version`** CLI flag and `aicost-mcp` script entry point
+- **Automated `pytest` & GitHub Actions CI (`ci.yml`)** — Validates pricing schema, calculation math, wheel contents, and TypeScript MCP build
+
+### Fixed
+- **Wheel Packaging Bug** — Bundled `data/pricing.json` inside the PyPI `.whl` archive via Hatchling `force-include` so fresh `pip install aicost-cli` works immediately offline
+- **Aggregator Platform Fee Calculation** — Fixed `calc`, `list`, and `mcp` to accurately add `platform_fee` on top of base token costs
+- **Currency Cache Directory Creation** — Fixed missing `~/.aicost` directory creation and upgraded to a 3-tier CDN currency engine (`@fawazahmed0/currency-api` + Cloudflare mirror + ECB fallback) supporting 200+ currencies
+- **Pricing Sync Substring Collisions** — Replaced substring matching in `scripts/automate_pricing.py` with exact `openrouter_id` matching
+- **MCP `uvx` Compatibility** — Included `mcp` dependency for Python 3.10+ with a lightweight built-in stdio JSON-RPC fallback for Python 3.9
+
+## [1.1.1] - 2026-04-24
+
+### Changed
+- Updated GitHub Actions workflows (`actions/checkout@v5`, `actions/setup-python@v6`) for Node.js 24 compatibility and PyPI Trusted Publisher release verification
+
 ## [1.1.0] - 2026-04-24
 
 ### Added
@@ -24,31 +51,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **TTS Standard/HD** — OpenAI text-to-speech ($15/$30 per 1M characters)
 - `legacy` tag for older flagship models (Claude Opus 4.6, GPT-4o, DeepSeek Coder V2)
 - `agentic` tag for models optimized for autonomous workflows
-- LICENSE file (MIT)
-- SECURITY.md — Vulnerability reporting policy
-- PRIVACY.md — Data transparency documentation
-- CODE_OF_CONDUCT.md — Contributor Covenant v2.1
-- CONTRIBUTING.md — Contribution guidelines
-- GitHub Issue Templates (Bug Report, Feature Request, Pricing Update)
-- README badges (License, Python, MCP)
+- LICENSE file (MIT), SECURITY.md, PRIVACY.md, CODE_OF_CONDUCT.md, CONTRIBUTING.md, and GitHub Issue Templates
 
 ### Changed
 - Updated pricing database date to 2026-04-24
-- Improved `.gitignore` for comprehensive Python project coverage
-- Enhanced `pyproject.toml` with license, classifiers, keywords, and URLs
+- Improved `.gitignore` and `pyproject.toml` metadata
 
 ## [1.0.0] - 2026-04-10
 
 ### Added
-- Initial release
-- `aicost list` — List all models with pricing
-- `aicost calc` — Calculate cost for specific usage
-- `aicost compare` — Side-by-side model comparison
-- `aicost recommend` — Task-based model recommendations
-- `aicost sync` — Manual pricing data sync from GitHub
-- `aicost report-price` — Generate GitHub issue for pricing updates
-- `aicost mcp` — MCP server for AI agent integration
-- Real-time currency conversion (USD, TRY, EUR, etc.)
-- Automated weekly pricing sync via GitHub Actions
-- Support for Direct, Aggregator, and Gateway provider types
-- Platform fee transparency for aggregators (e.g., OpenRouter 5.5%)
+- Initial release (`list`, `calc`, `compare`, `recommend`, `sync`, `report-price`, `mcp`)
