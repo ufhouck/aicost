@@ -1,6 +1,6 @@
 {
   "schema_version": "2.1",
-  "last_updated": "2026-11-20",
+  "last_updated": "2026-11-22",
   "models": [
     {
       "id": "gpt-6.2-astra-pro",
@@ -786,8 +786,8 @@
       "type": "text",
       "billing_unit": "1m_tokens",
       "context_window": 1048576,
-      "cost_per_1m_input_tokens": 0.075,
-      "cost_per_1m_output_tokens": 0.3,
+      "cost_per_1m_input_tokens": 0.15,
+      "cost_per_1m_output_tokens": 0.6,
       "tags": [
         "cheap",
         "fast",
@@ -795,7 +795,7 @@
         "general"
       ],
       "description": "One of the lowest-cost 1M-context models available ($0.075/$0.30 per 1M tokens).",
-      "cost_per_1m_cached_input_tokens": 0.0075
+      "cost_per_1m_cached_input_tokens": 0.015
     },
     {
       "id": "sonar-pro",
